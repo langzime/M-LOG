@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -92,7 +93,7 @@ public class Attachment implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = User.class)
-    @Column(name = "user")
+    @JoinColumn(name = "user")
     public User getUser() {
         return user;
     }
