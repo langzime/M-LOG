@@ -8,12 +8,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.mspring.mlog.entity.security.User;
 
 /**
  * @author Gao Youbo
@@ -34,7 +38,7 @@ public class Attachment implements Serializable {
     private String path;
     private Long size;
     private Date uploadTime;
-    private Long user;
+    private User user;
 
     /**
      * 
@@ -87,13 +91,13 @@ public class Attachment implements Serializable {
         this.uploadTime = uploadTime;
     }
 
-    @Column(name = "user", length = 30)
-    public Long getUser() {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = User.class)
+    @Column(name = "user")
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Long user) {
+    public void setUser(User user) {
         this.user = user;
     }
-
 }

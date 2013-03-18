@@ -72,7 +72,7 @@ public class AttachmentServiceImpl extends AbstractServiceSupport implements Att
         attachment.setPath(url);
         attachment.setSize(mf.getSize());
         attachment.setUploadTime(new Date());
-        attachment.setUser(SecurityUtils.getCurrentUser().getId());
+        attachment.setUser(SecurityUtils.getCurrentUser());
         Long id = (Long) create(attachment);
         return getAttachmentById(id);
     }
@@ -114,7 +114,7 @@ public class AttachmentServiceImpl extends AbstractServiceSupport implements Att
         attachment.setPath(url);
         attachment.setSize(size);
         attachment.setUploadTime(new Date());
-        attachment.setUser(user);
+        attachment.setUser(new User(user));
         Long id = (Long) create(attachment);
         return getAttachmentById(id);
     }
