@@ -12,7 +12,7 @@ package org.mspring.mlog.api.teamtoy;
 public class Const {
     public static final String URL = "http://team.mspring.org/?c=api";
     
-    public static final String TOKEN = "8m3qt7i1ja22gm9c87inhgnl41";
+    public static final String TOKEN = "1bdc18b201b";
     
     public final class ActionNames {
         public static final String team_members = "team_members";
