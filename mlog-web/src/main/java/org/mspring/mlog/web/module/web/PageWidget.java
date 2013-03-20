@@ -39,6 +39,9 @@ public class PageWidget extends AbstractWebWidget {
             return;
         }
         Page page = pageService.getPageById(new Long(id));
+        if (page == null) {
+            return;
+        }
         String content = page.getContent();
         FreemarkerRender render = new FreemarkerRender(page.getId().toString(), request, response);
         SimpleHash hash = render.buildTemplateModel();
