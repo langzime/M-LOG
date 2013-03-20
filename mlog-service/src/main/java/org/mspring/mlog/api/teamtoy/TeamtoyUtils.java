@@ -20,7 +20,7 @@ public class TeamtoyUtils {
      */
     public static String team_members() {
         TeamtoyAPI api = new TeamtoyAPI();
-        api.addParam(ParamNames.token, Const.TOKEN);
+        api.addParam("stoken", Const.TOKEN);
         api.addParam(ParamNames.action, ActionNames.team_members);
         return api.request();
     }
@@ -32,7 +32,7 @@ public class TeamtoyUtils {
      */
     public static String todo_list() {
         TeamtoyAPI api = new TeamtoyAPI();
-        api.addParam(ParamNames.token, Const.TOKEN);
+        api.addParam("stoken", Const.TOKEN);
         api.addParam(ParamNames.action, ActionNames.todo_list);
         api.addParam("count", "10");
         return api.request();

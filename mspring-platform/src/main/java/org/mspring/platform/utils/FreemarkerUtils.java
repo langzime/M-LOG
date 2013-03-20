@@ -11,6 +11,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 import org.apache.log4j.Logger;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -92,6 +93,22 @@ public class FreemarkerUtils {
             return false;
         }
         return true;
+    }
+
+    public static Configuration createConfiguration(String encoding) {
+        FreeMarkerConfigurationFactory factory = new FreeMarkerConfigurationFactory();
+        factory.setDefaultEncoding(encoding);
+        Configuration cfg = null;
+        try {
+            cfg = factory.createConfiguration();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (TemplateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return cfg;
     }
 
 }

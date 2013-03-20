@@ -28,8 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Widget
 @RequestMapping("/admin/tag")
 public class TagWidget extends AbstractAdminWidget {
-    private static final Logger log = Logger.getLogger(TagWidget.class);
-
     private TagService tagService;
 
     @Autowired
