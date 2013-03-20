@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+.icon-chevron-right {
+	float: right;
+	margin-top: 2px;
+	margin-right: -6px;
+	opacity: .25;
+}
+
+.back-left .active {
+	position: relative;
+	z-index: 2;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+	-webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1), inset -1px 0 0 rgba(0, 0, 0, .1);
+	-moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+	box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1), inset -1px 0 0 rgba(0, 0, 0, .1);
+	border-left-color:#08C;
+	border-right-color:#08C;
+}
+
+.back-left .active a,.back-left .active a:hover{
+	color: white;
+	background-color: #08C;
+	position: relative;
+	cursor:pointer;
+}
+
+.back-left .active .icon-chevron-right, .back-left .active a:hover .icon-chevron-right {
+	background-image: url(../images/glyphicons-halflings-white.png);
+	opacity: 1;
+}

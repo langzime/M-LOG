@@ -17,6 +17,7 @@ import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
 import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import freemarker.template.SimpleHash;
@@ -56,5 +57,10 @@ public class PageWidget extends AbstractWebWidget {
             writer.close();
         } catch (IOException e) {
         }
+    }
+
+    @RequestMapping("/p/{page}")
+    public String p(@PathVariable String page) {
+        return "/user/" + page;
     }
 }

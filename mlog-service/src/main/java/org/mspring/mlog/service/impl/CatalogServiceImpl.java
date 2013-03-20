@@ -10,6 +10,7 @@ import java.util.List;
 import org.mspring.mlog.entity.Catalog;
 import org.mspring.mlog.service.CatalogService;
 import org.mspring.mlog.utils.CatalogUtils;
+import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.core.AbstractServiceSupport;
 import org.mspring.platform.persistence.query.QueryCriterion;
 import org.mspring.platform.persistence.support.Page;
@@ -36,7 +37,12 @@ public class CatalogServiceImpl extends AbstractServiceSupport implements Catalo
     @Override
     public Catalog createCatalog(Catalog catalog) {
         // TODO Auto-generated method stub
-        catalog.setCreateTime(new Date());
+        if (catalog.getCreateTime() == null) {
+            catalog.setCreateTime(new Date());
+        }
+        if (catalog.getUser() == null) {
+            catalog.setUser(SecurityUtils.getCurrentUser());
+        }
         Long id = (Long) create(catalog);
         return getCatalogById(id);
     }

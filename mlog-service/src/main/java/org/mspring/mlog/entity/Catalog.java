@@ -22,6 +22,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.cache.CacheService;
 import org.mspring.platform.utils.StringUtils;
 
@@ -49,6 +50,7 @@ public class Catalog implements Serializable, Comparable<Catalog> {
     private Long order;
     private String description;
     private Catalog parent; // 父分类
+    private User user;
 
     private int deep = 1;
     private boolean hasChild = false; // 是否有自分类
@@ -183,6 +185,16 @@ public class Catalog implements Serializable, Comparable<Catalog> {
         this.parent = parent;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, targetEntity = User.class)
+    @JoinColumn(name = "user")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Transient
     public int getDeep() {
         return deep;
@@ -229,15 +241,6 @@ public class Catalog implements Serializable, Comparable<Catalog> {
     @Override
     public int compareTo(Catalog c2) {
         // TODO Auto-generated method stub
-        // int value = 0;
-        // Long o_1 = this.order;
-        // Long o_2 = c2.getOrder();
-        // if (o_2 == null || o_1 == null) {
-        // return 0;
-        // }
-        // value = o_1 > o_2 ? -1 : (o_1.equals(o_2) ? 0 : 1);
-        // return value;
-
         int flag = 0;
         if (c2.getOrder() == null && this.getOrder() != null) {
             flag = -1;

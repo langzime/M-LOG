@@ -8,9 +8,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mspring.mlog.entity.security.Resource;
 import org.mspring.mlog.entity.security.Role;
 import org.mspring.mlog.entity.security.TreeItem;
 import org.mspring.mlog.entity.security.User;
+import org.mspring.mlog.service.security.ResourceService;
 import org.mspring.mlog.service.security.RoleService;
 import org.mspring.mlog.service.security.TreeItemSecurityService;
 import org.mspring.mlog.service.security.TreeItemService;
@@ -42,6 +44,8 @@ public class RoleWidget extends AbstractAdminWidget {
     private TreeItemService treeItemService;
     @Autowired
     private TreeItemSecurityService treeItemSecurityService;
+    @Autowired
+    private ResourceService resourceService;
 
     @RequestMapping("/list")
     @Log
@@ -126,15 +130,20 @@ public class RoleWidget extends AbstractAdminWidget {
 
         List<TreeItem> treeItems = treeItemService.findAllTreeItems();
         List<TreeItem> authorized = treeItemSecurityService.getPremissions(id);
+        List<Resource> resources = resourceService.findAllResources();
+        List<Resource> authorized_res = resourceService.getResourcesByRole(id);
+
         model.addAttribute("id", id);
         model.addAttribute("treeItems", treeItems);
         model.addAttribute("authorized", authorized);
+        model.addAttribute("resources", resources);
+        model.addAttribute("authorized_res", authorized_res);
         return "/admin/role/authorize";
     }
 
     @RequestMapping("/authorize/save")
     @Log
-    public String saveAuthorize(@RequestParam(required = false) Long id, @RequestParam(required = false) String checkedItems, @RequestParam(required = false) String notCheckedItems, HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String saveAuthorize(@RequestParam(required = false) Long id, @RequestParam Long[] resources, @RequestParam(required = false) String checkedItems, @RequestParam(required = false) String notCheckedItems, HttpServletRequest request, HttpServletResponse response, Model model) {
         if (id == null) {
             return prompt(model, "请先选择要修改的角色");
         }
@@ -142,6 +151,9 @@ public class RoleWidget extends AbstractAdminWidget {
         treeItemSecurityService.setPremission(id, ids);
         String[] notIds = StringUtils.split(notCheckedItems, ",");
         treeItemSecurityService.removePremission(id, notIds);
+
+        // 授权资源权限
+        resourceService.setRoleResource(id, resources);
 
         User user = SecurityUtils.getCurrentUser(request);
         SecurityUtils.reloadUserDetails(user.getName(), request);

@@ -26,6 +26,7 @@ import org.mspring.mlog.service.cache.DefaultCacheService;
 import org.mspring.mlog.service.cache.OptionCacheService;
 import org.mspring.mlog.service.cache.WidgetCacheService;
 import org.mspring.mlog.service.search.HibernateSearchService;
+import org.mspring.mlog.service.security.ResourceService;
 import org.mspring.mlog.service.security.TreeItemService;
 import org.mspring.mlog.service.security.UserService;
 import org.mspring.platform.core.ContextManager;
@@ -83,6 +84,10 @@ public class ServiceFactory {
 
     public static TreeItemService getTreeItemService() {
         return ContextManager.getApplicationContext().getBean(TreeItemService.class);
+    }
+
+    public static ResourceService getResourceService() {
+        return ContextManager.getApplicationContext().getBean(ResourceService.class);
     }
 
     public static LinkTypeService getLinkTypeService() {

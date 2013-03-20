@@ -36,8 +36,6 @@
 	function onClick(e,treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("treeMenu");
 		zTree.expandNode(treeNode);
-		
-		//e.preventDefault();
 	}
 
 	$(document).ready(function(){
@@ -103,6 +101,15 @@
 		getNotCheckedItems();
 		$("#roleForm").submit();
 	}
+	
+	//设置已经授权的资源
+	$(document).ready(function(){
+		<#if (authorized_res?exists && authorized_res?size > 0)>
+		<#list authorized_res as res>
+		$("#resource_${res.id}").attr('checked', 'checked');
+		</#list>
+		</#if>
+	});
 </script>
 <form class="form" id="roleForm" action="${base}/admin/role/authorize/save" method="POST">
 	<input type="hidden" id="checkedItems" name="checkedItems" />
@@ -111,6 +118,13 @@
 	<table class="infotable">
 		<tr>
 			<td class="partition">授权</td>
+		</tr>
+		<tr>
+			<td>
+				<#list resources as resource>
+					<input type="checkbox" name="resources" id="resource_${resource.id}" value="${resource.id}" /><label for="resource_${resource.id}">${resource.name}(${resource.url})</label>&nbsp;&nbsp;
+				</#list>
+			</td>
 		</tr>
 		<tr>
 			<td>

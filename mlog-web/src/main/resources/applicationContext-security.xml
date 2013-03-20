@@ -97,7 +97,9 @@
 		<!-- <beans:property name="tokenValiditySeconds" value="86400"></beans:property> -->
 		<beans:property name="parameter" value="rememberMe"></beans:property>
 	</beans:bean>
-	<beans:bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+	
+	<!-- <beans:bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider"> -->
+	<beans:bean id="rememberMeAuthenticationProvider" class="org.mspring.mlog.web.security.rememberme.RememberMeAuthenticationProvider">
 		<beans:property name="key" value="mlog_security_cookie" />
 	</beans:bean>
 	<!-- remember me Configuration end -->

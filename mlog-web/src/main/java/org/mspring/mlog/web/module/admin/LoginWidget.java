@@ -49,35 +49,7 @@ public class LoginWidget extends AbstractAdminWidget {
         return "/admin/login";
     }
 
-    // @RequestMapping(value = { "/doLogin" }, method = { RequestMethod.POST })
-    public String doLogin(@ModelAttribute User user, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
-        Object sessionValidateCode = session.getAttribute(Keys.SESSION_VALIDATE_CODE);
-        if (sessionValidateCode == null) {
-            // 验证码超时
-            model.addAttribute(MESSAGE, "登录失败，验证码超时。");
-            return "/admin/login";
-        }
-        String validateCode = request.getParameter("validateCode");
-        if (!sessionValidateCode.toString().equalsIgnoreCase(validateCode)) {
-            // 验证码错误
-            model.addAttribute(MESSAGE, "登录失败，验证码输入错误。");
-            return "/admin/login";
-        }
-        User loginUser = userService.login(user.getName(), user.getPassword());
-        if (loginUser != null) {
-            session.setAttribute(Keys.CURRENT_USER, loginUser);
-            if (user.isRememberMe()) {
-                CookieUtils.setCookie(response, Keys.IS_REMEMBER_USER_COOKIE, "true", 365);
-                CookieUtils.setCookie(response, Keys.USERNAME_COOKIE, user.getName(), 365);
-                CookieUtils.setCookie(response, Keys.PASSWORD_COOKIE, user.getPassword(), 365);
-            }
-            return "redirect:/admin/index";
-        }
-        model.addAttribute(MESSAGE, "登录失败，请检查用户名密码是否正确。");
-        return "/admin/login";
-    }
-
-    // @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(@ModelAttribute User user, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
         session.invalidate();
         CookieUtils.setCookie(response, Keys.IS_REMEMBER_USER_COOKIE, "false", 365);

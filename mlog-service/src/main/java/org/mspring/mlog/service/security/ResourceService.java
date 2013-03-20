@@ -6,6 +6,8 @@ package org.mspring.mlog.service.security;
 import java.util.List;
 
 import org.mspring.mlog.entity.security.Resource;
+import org.mspring.platform.persistence.query.QueryCriterion;
+import org.mspring.platform.persistence.support.Page;
 
 /**
  * @author Gao Youbo
@@ -36,4 +38,42 @@ public interface ResourceService {
      * @return
      */
     Resource getResourceById(Long id);
+
+    /**
+     * 更新资源
+     * 
+     * @param resource
+     */
+    void updateResource(Resource resource);
+
+    /**
+     * 删除资源
+     * 
+     * @param id
+     */
+    void deleteResource(Long... id);
+
+    /**
+     * 分页查询
+     * 
+     * @param queryCriterion
+     * @param resourcePage
+     * @return
+     */
+    Page<Resource> findResourcePage(QueryCriterion queryCriterion, Page<Resource> resourcePage);
+
+    /**
+     * 给角色授权资源
+     * 
+     * @param roleId
+     * @param resources
+     */
+    void setRoleResource(Long roleId, Long... resources);
+
+    /**
+     * 根据角色获取该角色拥有的资源
+     * 
+     * @param roleId
+     */
+    List<Resource> getResourcesByRole(Long roleId);
 }

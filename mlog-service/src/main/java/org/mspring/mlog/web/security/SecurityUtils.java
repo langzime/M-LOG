@@ -90,4 +90,12 @@ public class SecurityUtils {
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+    /**
+     * 重新加载资源
+     */
+    public static void reloadResourceDefine() {
+        SecurityMetadataSource.resetResourceDefine();
+        SecurityMetadataSource.loadResourceDefine();
+    }
 }

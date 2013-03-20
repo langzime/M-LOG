@@ -67,8 +67,7 @@ public class StandardInstallServiceImpl extends AbstractInstallService {
         items.add(new TreeItem("125005", "列表", "125", "/admin/tag/list", TreeItem.Type.TAB, true));
         items.add(new TreeItem("125010", "增加", "125", "/admin/tag/create", TreeItem.Type.TAB, false));
         items.add(new TreeItem("125015", "修改", "125", "/admin/tag/edit", TreeItem.Type.TAB, false));
-        
-        
+
         items.add(new TreeItem("130", "独立页", "1", "", TreeItem.Type.TREE_ITEM, true));
         items.add(new TreeItem("130005", "列表", "130", "/admin/page/list", TreeItem.Type.TAB, true));
         items.add(new TreeItem("130010", "增加", "130", "/admin/page/create", TreeItem.Type.TAB, false));
@@ -85,7 +84,7 @@ public class StandardInstallServiceImpl extends AbstractInstallService {
 
         /**********************************************************************************************************/
 
-        items.add(new TreeItem("3", "用户", "0", "", TreeItem.Type.TREE_FOLDER, true));
+        items.add(new TreeItem("3", "权限管理", "0", "", TreeItem.Type.TREE_FOLDER, true));
         items.add(new TreeItem("305", "用户管理", "3", "", TreeItem.Type.TREE_ITEM, true));
         items.add(new TreeItem("305005", "列表", "305", "/admin/user/list", TreeItem.Type.TAB, true));
         items.add(new TreeItem("305010", "新增", "305", "/admin/user/create", TreeItem.Type.TAB, false));
@@ -96,6 +95,11 @@ public class StandardInstallServiceImpl extends AbstractInstallService {
         items.add(new TreeItem("310010", "新增", "310", "/admin/role/create", TreeItem.Type.TAB, false));
         items.add(new TreeItem("310015", "修改", "310", "/admin/role/edit", TreeItem.Type.TAB, false));
         items.add(new TreeItem("310020", "授权", "310", "/admin/role/authorize", TreeItem.Type.TAB, false));
+
+        items.add(new TreeItem("315", "资源", "3", "", TreeItem.Type.TREE_ITEM, true));
+        items.add(new TreeItem("315005", "列表", "315", "/admin/resource/list", TreeItem.Type.TAB, true));
+        items.add(new TreeItem("315010", "新增", "315", "/admin/resource/create", TreeItem.Type.TAB, false));
+        items.add(new TreeItem("315015", "修改", "315", "/admin/resource/edit", TreeItem.Type.TAB, false));
 
         /**********************************************************************************************************/
 
@@ -125,7 +129,7 @@ public class StandardInstallServiceImpl extends AbstractInstallService {
 
         items.add(new TreeItem("435", "缓存管理", "4", "", TreeItem.Type.TREE_ITEM, true));
         items.add(new TreeItem("435005", "缓存管理", "435", "/admin/system/cache/config", TreeItem.Type.TAB, true));
-        
+
         items.add(new TreeItem("495", "系统日志", "4", "", TreeItem.Type.TREE_ITEM, true));
         items.add(new TreeItem("495005", "列表", "495", "/admin/log/list", TreeItem.Type.TAB, true));
         items.add(new TreeItem("495010", "明细", "495", "/admin/log/view", TreeItem.Type.TAB, false));

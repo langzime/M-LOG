@@ -36,6 +36,10 @@ public class RoleResource implements Serializable {
         // TODO Auto-generated constructor stub
     }
 
+    public RoleResource(Long roleId, Long resourceId) {
+        this.PK = new RoleResourcePK(new Role(roleId), new Resource(resourceId));
+    }
+
     /**
      * @param pK
      */
@@ -43,7 +47,7 @@ public class RoleResource implements Serializable {
         super();
         PK = pK;
     }
-    
+
     @EmbeddedId
     @AttributeOverrides({ @AttributeOverride(name = "roleId", column = @Column(name = "role_id", nullable = false)), @AttributeOverride(name = "resourceId", column = @Column(name = "resource_id", nullable = false)) })
     public RoleResourcePK getPK() {

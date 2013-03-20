@@ -155,21 +155,4 @@ public class User implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
-    /**
-     * @return the rememberMe
-     */
-    @Transient
-    public boolean isRememberMe() {
-        return rememberMe;
-    }
-
-    /**
-     * @param rememberMe
-     *            the rememberMe to set
-     */
-    public void setRememberMe(boolean rememberMe) {
-        this.rememberMe = rememberMe;
-    }
-
 }

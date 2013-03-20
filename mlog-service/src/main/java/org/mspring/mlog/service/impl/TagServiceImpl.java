@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.mspring.mlog.entity.Tag;
 import org.mspring.mlog.service.TagService;
+import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.core.AbstractServiceSupport;
 import org.mspring.platform.persistence.query.QueryCriterion;
 import org.mspring.platform.persistence.support.Page;
@@ -60,7 +61,13 @@ public class TagServiceImpl extends AbstractServiceSupport implements TagService
     @Override
     public Tag createTag(Tag tag) {
         // TODO Auto-generated method stub
-        Serializable id = super.create(tag);
+        if (tag.getCreateTime() == null) {
+            tag.setCreateTime(new Date());
+        }
+        if (tag.getUser() == null) {
+            tag.setUser(SecurityUtils.getCurrentUser());
+        }
+        Serializable id = create(tag);
         return getTagById((Long) id);
     }
 
@@ -72,37 +79,39 @@ public class TagServiceImpl extends AbstractServiceSupport implements TagService
     @Override
     public Tag getTagById(Long id) {
         // TODO Auto-generated method stub
-        return (Tag) getById(Tag.class, id);
+        Object tag = getById(Tag.class, id);
+        if (tag != null) {
+            return (Tag) tag;
+        }
+        return null;
     }
 
-	public Page<Tag> findTag(Page<Tag> page, QueryCriterion queryCriterion) {
+    public Page<Tag> findTag(Page<Tag> page, QueryCriterion queryCriterion) {
 
-		return super.findPage(queryCriterion, page);
-	}
+        return super.findPage(queryCriterion, page);
+    }
 
-	public void deleteTag(Long... idArray) {
-		super.remove(Tag.class, idArray);
-	}
+    public void deleteTag(Long... idArray) {
+        super.remove(Tag.class, idArray);
+    }
 
-	public boolean checkTagNameExists(String name, Long id) {
-		//System.out.println(name+""+id);
-		 int count = 0;
-	        if (id == null) {
-	            count = count("select count(*) from Tag tag where tag.name = ?", name);
-	        } else {
-	            count = count("select count(*) from Tag tag where tag.name = ? and tag.id <> ?", new Object[] { name, id });
-	        }
-	      //  System.out.println(count);
-	     return count > 0;
-	}
+    public boolean checkTagNameExists(String name, Long id) {
+        // System.out.println(name+""+id);
+        int count = 0;
+        if (id == null) {
+            count = count("select count(*) from Tag tag where tag.name = ?", name);
+        } else {
+            count = count("select count(*) from Tag tag where tag.name = ? and tag.id <> ?", new Object[] { name, id });
+        }
+        // System.out.println(count);
+        return count > 0;
+    }
 
-	public void modifyTag(Tag tag) {
-		if(tag.getCreateTime() == null){
-			tag.setCreateTime(new Date());
-		}
-		update(tag);
-	}
-	
-	
+    public void modifyTag(Tag tag) {
+        if (tag.getCreateTime() == null) {
+            tag.setCreateTime(new Date());
+        }
+        update(tag);
+    }
 
 }

@@ -32,7 +32,7 @@
 				</#if>
 			</div>
 			<div class="loginBoxButtons">
-				<@spring.formCheckbox path="user.rememberMe" />
+				<input type="checkbox" name="rememberMe" id="rememberMe" />
 				<label for="rememberMe">记住登录状态</label>
 				<input type="submit" class="loginBtn" value="登录" />
 			</div>

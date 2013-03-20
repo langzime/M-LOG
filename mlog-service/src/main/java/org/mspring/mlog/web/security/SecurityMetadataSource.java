@@ -12,12 +12,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mspring.mlog.core.ServiceFactory;
 import org.mspring.mlog.entity.security.Resource;
 import org.mspring.mlog.entity.security.TreeItem;
 import org.mspring.mlog.service.security.ResourceService;
 import org.mspring.mlog.service.security.TreeItemService;
 import org.mspring.platform.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -33,18 +33,23 @@ import org.springframework.security.web.util.RequestMatcher;
  */
 public class SecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
-    private Map<String, Collection<ConfigAttribute>> resourceMap = null;
+    private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
 
-    @Autowired
-    private ResourceService resourceService;
-    @Autowired
-    private TreeItemService treeItemService;
+    /**
+     * 重置资源定义
+     */
+    public static void resetResourceDefine() {
+        resourceMap = null;
+    }
 
     /**
      * 加载所有资源与权限的关系
      */
-    private void loadResourceDefine() {
+    public static void loadResourceDefine() {
         if (resourceMap == null) {
+            ResourceService resourceService = ServiceFactory.getResourceService();
+            TreeItemService treeItemService = ServiceFactory.getTreeItemService();
+
             resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
             List<Resource> resources = resourceService.findAllResources();
             for (Resource resource : resources) {
