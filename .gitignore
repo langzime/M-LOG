@@ -2,3 +2,4 @@ mlog-service/target
 mspring-platform/target
 target
 mlog.log
+mlog-web/src/main/webapp/uploads
