@@ -47,7 +47,7 @@ public class MKuaipanAPI extends KuaipanAPI {
         getSession().unAuth();
         
          
-        String callback = ServiceFactory.getOptionService().getOption("blogurl");
+        String callback = ServiceFactory.getOptionService().getOption("siteurl");
         if (callback.endsWith("/")) {
             callback = callback + "admin/api/kuaipan/accessToken";
         }

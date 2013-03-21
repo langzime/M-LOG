@@ -8,7 +8,7 @@
 					<#if currentPage == "catalog_archive">
 						<ul class="breadcrumb">
 							<li>
-    							<a href="${blogname}">首页</a> <span class="divider">/</span>
+    							<a href="${sitename}">首页</a> <span class="divider">/</span>
 						  	</li>
 						  	<li class="active">分类：${catalogArchiveName}</li>
 						</ul>
@@ -16,7 +16,7 @@
 					<#if currentPage == "tag_archive">
 						<ul class="breadcrumb">
 							<li>
-    							<a href="${blogname}">首页</a> <span class="divider">/</span>
+    							<a href="${sitename}">首页</a> <span class="divider">/</span>
 						  	</li>
 						  	<li class="active">TAG：${tagArchiveName}</li>
 						</ul>

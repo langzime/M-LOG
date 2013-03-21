@@ -46,7 +46,7 @@ public class SitemapJob extends BaseJob {
     public void nativeExecuteInternal(JobExecutionContext context) {
         // TODO Auto-generated method stub
         try {
-            String baseUrl = optionService.getOption("blogurl");
+            String baseUrl = optionService.getOption("siteurl");
             String baseDirPath = WebUtils.getRealContextPath();
             File baseDir = new File(baseDirPath);
 

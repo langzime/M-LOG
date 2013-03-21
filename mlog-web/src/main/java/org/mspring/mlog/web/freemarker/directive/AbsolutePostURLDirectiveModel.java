@@ -35,7 +35,7 @@ public class AbsolutePostURLDirectiveModel extends AbstractDirectiveModel {
     @Override
     public void execute(Environment env, Map params, TemplateModel[] model, TemplateDirectiveBody body) throws TemplateException, IOException {
         // TODO Auto-generated method stub
-        String blogurl = ServiceFactory.getOptionService().getOption("blogurl");
+        String siteurl = ServiceFactory.getOptionService().getOption("siteurl");
 
         String postUrl = "";
         Long id = DirectiveUtils.getLong("id", params);
@@ -52,10 +52,10 @@ public class AbsolutePostURLDirectiveModel extends AbstractDirectiveModel {
                 postUrl = PostUrlUtils.getPostUrl(post);
             }
         }
-        if (blogurl.endsWith("/") || blogurl.endsWith("\\")) {
-            blogurl = blogurl.substring(0, blogurl.length() - 1);
+        if (siteurl.endsWith("/") || siteurl.endsWith("\\")) {
+            siteurl = siteurl.substring(0, siteurl.length() - 1);
         }
-        String absoluteUrl = blogurl + postUrl;
+        String absoluteUrl = siteurl + postUrl;
         env.getOut().append(absoluteUrl);
     }
 }

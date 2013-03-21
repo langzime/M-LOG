@@ -40,7 +40,7 @@ public class InstallController extends AbstractWidget {
     @RequestMapping({ "", "/", "/setup1" })
     public String setup1(HttpServletRequest request, HttpServletResponse response, Model model) {
         if (installService.hasInstall()) {
-            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("blogurl"));
+            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("siteurl"));
         }
         return "/install/setup1";
     }
@@ -56,7 +56,7 @@ public class InstallController extends AbstractWidget {
     @RequestMapping(value = "/setup2")
     public String setup2(HttpServletRequest request, HttpServletResponse response, Model model) {
         if (installService.hasInstall()) {
-            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("blogurl"));
+            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("siteurl"));
         }
         return "redirect:/install/setup3";
     }
@@ -72,12 +72,12 @@ public class InstallController extends AbstractWidget {
     @RequestMapping(value = "/setup3")
     public String setup3_view(HttpServletRequest request, HttpServletResponse response, Model model) {
         if (installService.hasInstall()) {
-            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("blogurl"));
+            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("siteurl"));
         }
         StringBuffer url = request.getRequestURL();
-        String blogurl = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();
-        blogurl = blogurl + request.getContextPath();
-        model.addAttribute("blogurl", blogurl);
+        String siteurl = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();
+        siteurl = siteurl + request.getContextPath();
+        model.addAttribute("siteurl", siteurl);
         return "/install/setup3";
     }
 
@@ -92,17 +92,17 @@ public class InstallController extends AbstractWidget {
     @RequestMapping("/setup4")
     public String setup4(HttpServletRequest request, HttpServletResponse response, Model model) {
         if (installService.hasInstall()) {
-            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("blogurl"));
+            return prompt(model, "系统消息", "系统已经安装，不能重复运行安装引导", optionService.getOption("siteurl"));
         }
         try {
-            String blogname = request.getParameter("blogname");
-            String blogurl = request.getParameter("blogurl");
+            String sitename = request.getParameter("sitename");
+            String siteurl = request.getParameter("siteurl");
             String username = request.getParameter("username");
             String alias = request.getParameter("alias");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
 
-            installService.initBlogInfo(blogname, blogurl, username, alias, password, email);
+            installService.initBlogInfo(sitename, siteurl, username, alias, password, email);
             installService.initTreeItems();
             installService.initPosts();
             installService.initLinks();
@@ -112,8 +112,8 @@ public class InstallController extends AbstractWidget {
             return "/install/failure";
         }
         installService.setHasInstalled();
-        String blogurl = optionService.getOption("blogurl");
-        model.addAttribute("blogurl", blogurl);
+        String siteurl = optionService.getOption("siteurl");
+        model.addAttribute("siteurl", siteurl);
         return "/install/success";
     }
 }

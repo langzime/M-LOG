@@ -229,8 +229,8 @@ public class MetaWeblogAPI {
 
     private String getUsersBlogs() {
         final String blogId = "";
-        final String blogName = optionService.getOption("blogname");
-        final String blogURL = "";
+        final String siteName = optionService.getOption("sitename");
+        final String siteUrl = optionService.getOption("siteurl");
 
         StringBuilder result = new StringBuilder();
         result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -250,12 +250,12 @@ public class MetaWeblogAPI {
 
         result.append("                                 <member>\n");
         result.append("                                     <name>url</name>\n");
-        result.append("                                     <value>").append(blogURL).append("</value>\n");
+        result.append("                                     <value>").append(siteUrl).append("</value>\n");
         result.append("                                 </member>\n");
 
         result.append("                                 <member>\n");
-        result.append("                                     <name>blogName</name>\n");
-        result.append("                                     <value>").append(blogName).append("</value>\n");
+        result.append("                                     <name>siteName</name>\n");
+        result.append("                                     <value>").append(siteName).append("</value>\n");
         result.append("                                 </member>\n");
 
         result.append("                             </struct>\n");
@@ -609,10 +609,10 @@ public class MetaWeblogAPI {
                 for (Node catalogNode : categories) {
                     String categoryName = XMLUtils.parseForString(catalogNode, "string");
                     if (!StringUtils.isBlank(categoryName)) {
-                        Catalog catalog = catalogService.getCatalogByName(categoryName);
-                        if (catalog != null) {
-                            catalogSet.add(catalog);
-                        }
+//                        Catalog catalog = catalogService.getCatalogByName(categoryName);
+//                        if (catalog != null) {
+//                            catalogSet.add(catalog);
+//                        }
                     }
                 }
                 post.setCatalogs(catalogSet);

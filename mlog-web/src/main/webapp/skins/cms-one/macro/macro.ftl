@@ -48,19 +48,19 @@
 		<#if postPage.getPageNo() == page>
 			<li class="active"><a href="javascript:void(0);">${page}</a></li>
 		<#else>
-			<li><a href="${blogurl}/catalog/catalog-${catalogId}-${page}.html" title="${title}">${label}</a>
+			<li><a href="${siteurl}/catalog/catalog-${catalogId}-${page}.html" title="${title}">${label}</a>
 		</#if>
 	<#elseif tagId?exists && tagId?has_content>
 		<#if postPage.getPageNo() == page>
 			<li class="active">${page}</li>
 		<#else>
-			<li><a href="${blogurl}/tag/tag-${tagId}-${page}.html" title="${title}">${label}</a></li>
+			<li><a href="${siteurl}/tag/tag-${tagId}-${page}.html" title="${title}">${label}</a></li>
 		</#if>
 	<#else>
 		<#if postPage.getPageNo() == page>
 			<li class="active">${page}</li>
 		<#else>
-			<li><a href="${blogurl}/post/page-${page}.html" title="${title}">${label}</a></li>
+			<li><a href="${siteurl}/post/page-${page}.html" title="${title}">${label}</a></li>
 		</#if>
 	</#if>
 </#macro>

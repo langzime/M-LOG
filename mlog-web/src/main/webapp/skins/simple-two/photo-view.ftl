@@ -6,13 +6,13 @@
 			<div class="row-fluid">
 				<ul class="breadcrumb">
 					<li>
-						<a href="${blogurl}">首页</a> <span class="divider">/</span>
+						<a href="${siteurl}">首页</a> <span class="divider">/</span>
 				  	</li>
 				  	<li>
-						<a href="${blogurl}/album/list.html">相册列表</a> <span class="divider">/</span>
+						<a href="${siteurl}/album/list.html">相册列表</a> <span class="divider">/</span>
 				  	</li>
 				  	<li>
-						<a href="${blogurl}/album/album-${photo.album.id}-1.html">${photo.album.name}</a> <span class="divider">/</span>
+						<a href="${siteurl}/album/album-${photo.album.id}-1.html">${photo.album.name}</a> <span class="divider">/</span>
 				  	</li>
 				  	<li class="active">${photo.name}</li>
 				</ul>

@@ -46,10 +46,10 @@
 		<div class="span9">
 			<ul class="breadcrumb">
 				<li>
-					<a href="${blogurl}">首页</a> <span class="divider">/</span>
+					<a href="${siteurl}">首页</a> <span class="divider">/</span>
 			  	</li>
 			  	<li>
-					<a href="${blogurl}/album/list.html">相册列表</a> <span class="divider">/</span>
+					<a href="${siteurl}/album/list.html">相册列表</a> <span class="divider">/</span>
 			  	</li>
 			  	<li class="active">${album.name}</li>
 			</ul>
@@ -58,7 +58,7 @@
 					<div class="main-albums">
 						<#list photoPage.result as photo>
 							<div class="album-item">
-								<a href="${blogurl}/album/photo-${photo.id}.html" title="${photo.description!photo.name}"><img class="item-image" src="${base}${photo.previewUrl}" alt="${photo.description!photo.name}" /></a>
+								<a href="${siteurl}/album/photo-${photo.id}.html" title="${photo.description!photo.name}"><img class="item-image" src="${base}${photo.previewUrl}" alt="${photo.description!photo.name}" /></a>
 							</div>
 						</#list>
 					</div>
@@ -80,7 +80,7 @@
 								<li <#if photo_index == 0>class="liSelected"</#if>>
 									<span class="sPic">
 										<i class="iBigPic">
-											<a href="${blogurl}/album/photo-${photo.id}.html" target="_blank" title="${photo.description!photo.name}">
+											<a href="${siteurl}/album/photo-${photo.id}.html" target="_blank" title="${photo.description!photo.name}">
 												<img width="560" height="420" src="${base}${photo.url}">
 											</a>
 										</i>			
@@ -93,7 +93,7 @@
 											图片描述：${photo.description!""}<br/>
 											简介： ${photo.description!""}
 										</span>
-										<span class="sMore"><a href="${blogurl}/album/photo-${photo.id}.html" target="_blank">查看大图&gt;&gt;</a></span>
+										<span class="sMore"><a href="${siteurl}/album/photo-${photo.id}.html" target="_blank">查看大图&gt;&gt;</a></span>
 									</span>
 								</li>
 							</#list>

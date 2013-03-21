@@ -7,7 +7,7 @@
 					<#if post?exists>
 						<ul class="breadcrumb">
 							<li>
-						    	<a href="${blogurl}">首页</a> <span class="divider">/</span>
+						    	<a href="${siteurl}">首页</a> <span class="divider">/</span>
 						  	</li>
 						  	<#if (post.catalogs?exists && post.catalogs?size > 0)>
 								<li>
@@ -74,7 +74,7 @@
                                 
 								<div class="post-copyright">
 									如非注明，本站文章均为原创，转载请注明出处。<br/>
-									本站地址：<a href="${blogurl}" target="_blank" title="${blogname}">${blogname}</a> <a href="${blogurl}" target="_blank" title="${blogname}">${blogurl}</a><br/>
+									本站地址：<a href="${siteurl}" target="_blank" title="${sitename}">${sitename}</a> <a href="${siteurl}" target="_blank" title="${sitename}">${siteurl}</a><br/>
 									本文地址：<a href="<@postUrl post="post" />" target="_blank" title="${post.title}"><@absolute_post_url /></a><br/>
 								</div>
                               

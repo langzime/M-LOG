@@ -5,7 +5,7 @@ KindEditor.plugin('mlog-uploads', function(k){
 	editor.clickToolbar(name, function() {
 		var api = mlog.dialog.showDialog({
 			title : '图片上传',
-			content : 'url:/admin/attachment/dialog',
+			content : 'url:' + mlog.variable.base + '/common/attachment/dialog',
 			width : '600px',
 			height : '420px',
 			button : [{
@@ -58,7 +58,7 @@ function imageContains(image){
 function insertImage(id){
 	for(var i = 0; i < images.length; i++){
 		if(images[i].id === id){
-			var imageHtml = '<img src="' + images[i].path + '" id="attachment_' + images[i].id + '"/>';
+			var imageHtml = '<img src="' + mlog.variable.base + images[i].path + '" id="attachment_' + images[i].id + '"/>';
 			editor.insertHtml(imageHtml);
 		}
 	}

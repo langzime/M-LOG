@@ -32,7 +32,7 @@ public class MLogTitleDirectiveModel extends AbstractDirectiveModel {
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
         // TODO Auto-generated method stub
-        String title = ServiceFactory.getOptionService().getOption("blogname");
+        String title = ServiceFactory.getOptionService().getOption("sitename");
         Object obj = env.__getitem__(FreemarkerVariableNames.CURRENT_PAGE);
         if (obj != null && StringUtils.isNotBlank(obj.toString())) {
             String currentPage = obj.toString();

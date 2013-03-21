@@ -79,7 +79,7 @@ public class Catalog implements Serializable, Comparable<Catalog> {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false, length = 30)
+    @Column(name = "id", nullable = false, length = 30)
     public Long getId() {
         return id;
     }

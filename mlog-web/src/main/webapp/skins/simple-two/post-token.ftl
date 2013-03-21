@@ -9,7 +9,7 @@
 						<#if not_token?has_content>
 							<span style="color:red;">密码验证失败</span>
 						</#if>
-						<form action="${blogurl}/post/token" method="POST">
+						<form action="${siteurl}/post/token" method="POST">
 							<input type="hidden" name="postId" value="${postId}"/>
 							<input type="hidden" name="postUrl" value="${postUrl}"/>
 							<input type="text" name="password" value=""/> <input type="submit"  value="提交"/>

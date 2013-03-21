@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.admin;
+package org.mspring.mlog.web.module.common;
 
 import java.util.Map;
 
@@ -12,6 +12,7 @@ import org.mspring.mlog.entity.Attachment;
 import org.mspring.mlog.service.AttachmentService;
 import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
+import org.mspring.mlog.web.module.admin.AbstractAdminWidget;
 import org.mspring.platform.utils.JSONUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * @TODO
  */
 @Widget
-@RequestMapping("/admin/attachment")
+@RequestMapping("/common/attachment")
 public class AttachmentWidget extends AbstractAdminWidget {
     @Autowired
     private AttachmentService attachmentService;
@@ -49,10 +50,6 @@ public class AttachmentWidget extends AbstractAdminWidget {
             }
             Attachment attachment = attachmentService.createAttachment(mf);
             return JSONUtils.toJson(attachment);
-            // Map obj = new HashMap();
-            // obj.put("error", 0);
-            // obj.put("url", attachment.getPath());
-            // return JSONUtils.toJson(obj);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -62,6 +59,6 @@ public class AttachmentWidget extends AbstractAdminWidget {
 
     @RequestMapping("/dialog")
     public String uploadDialog(HttpServletRequest request, HttpServletResponse response, Model model) {
-        return "/admin/attachment/dialog";
+        return "/common/attachment/dialog";
     }
 }

@@ -45,7 +45,7 @@
 		        height           : 20,
 		        width            : 60,
 		        swf              : '${base}/script/uploadify/uploadify.swf',
-		        uploader         : '${base}/admin/attachment/upload',
+		        uploader         : '${base}/common/attachment/upload',
 		        method           : 'GET',
 		        buttonClass      : 'btn',
 		        buttonText       : '选择图片',
@@ -107,9 +107,9 @@
 			$('#uploadify').uploadify('stop');
 		}
 		
-		//没上传成功一张图片就在突破列表中追加一张
+		//每上传成功一张图片就在突破列表中追加一张
 		function appendImageList(image){
-			$("#imgattachlist").append('<img src="' + image.path + '" id="attachment_' + image.id + '" onclick="insertImage(' + image.id + ')" />');
+			$("#imgattachlist").append('<img src="${base}' + image.path + '" id="attachment_' + image.id + '" onclick="insertImage(' + image.id + ')" />');
 			W.addImage(image);
 		}
 		

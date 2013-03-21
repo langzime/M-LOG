@@ -16,7 +16,7 @@ public interface InstallService {
 
     public boolean hasUser();
 
-    public void initBlogInfo(String blogname, String blogurl, String username, String alias, String password, String email);
+    public void initBlogInfo(String sitename, String siteurl, String username, String alias, String password, String email);
 
     public void initPosts();
 

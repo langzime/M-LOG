@@ -119,43 +119,6 @@ public class CatalogServiceImpl extends AbstractServiceSupport implements Catalo
      * (non-Javadoc)
      * 
      * @see
-     * org.mspring.mlog.service.CatalogService#getCatalogByName(java.lang.String
-     * )
-     */
-    @Override
-    public Catalog getCatalogByName(String name) {
-        // TODO Auto-generated method stub
-        Object catalog = findUnique("select catalog from Catalog catalog where catalog.name = ?", name);
-        return catalog == null ? null : (Catalog) catalog;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.mspring.mlog.service.CatalogService#catalogExists(java.lang.String,
-     * java.lang.String)
-     */
-    @Override
-    public boolean catalogExists(String name, Long id) {
-        // TODO Auto-generated method stub
-        int count = 0;
-        if (id == null) {
-            count = count("select count(*) from Catalog catalog where catalog.name = ?", name);
-        } else {
-            count = count("select count(*) from Catalog catalog where catalog.name = ? and catalog.id <> ?", new Object[] { name, id });
-        }
-        if (count > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
      * org.mspring.mlog.service.CatalogService#setCatalogOrders(java.lang.Long
      * [], java.lang.Long[])
      */
@@ -211,5 +174,27 @@ public class CatalogServiceImpl extends AbstractServiceSupport implements Catalo
         List<Catalog> result = new ArrayList<Catalog>();
         CatalogUtils.getTreeByParent(parentCatalog, catalogs, result);
         return result;
+    }
+
+    @Override
+    public boolean catalogExists(String name, Long id, Long userId) {
+        // TODO Auto-generated method stub
+        int count = 0;
+        if (id == null) {
+            count = count("select count(*) from Catalog catalog where catalog.name = ? and catalog.user.id = ?", new Object[] { name, userId });
+        } else {
+            count = count("select count(*) from Catalog catalog where catalog.name = ? and catalog.user.id = ? and catalog.id <> ?", new Object[] { name, userId, id });
+        }
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Catalog> findCatalogByUser(Long user) {
+        // TODO Auto-generated method stub
+        return find("select c from Catalog c where c.user.id = ?", user);
     }
 }

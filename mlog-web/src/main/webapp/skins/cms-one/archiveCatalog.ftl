@@ -10,7 +10,7 @@
 		        	</a>
 		        	<div class="nav-collapse">
 			          	<ul class="nav">
-				            <li class="active"><a href="${blogurl}">首页</a></li>
+				            <li class="active"><a href="${siteurl}">首页</a></li>
 				            <li><a href="#">开源软件</a></li>
 				            <li><a href="#">代码分享</a></li>
 				            <li><a href="${base}/catalog/catalog-31.html">资讯</a></li>
@@ -32,7 +32,7 @@
 			<div class="span9">
 				<ul class="breadcrumb">
 					<li>
-				    	<a href="${blogurl}">首页</a> <span class="divider">/</span>
+				    	<a href="${siteurl}">首页</a> <span class="divider">/</span>
 				  	</li>
 				  	<li class="active">
 				    	<a href="${base}">${catalog.name}</a>

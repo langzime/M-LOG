@@ -31,7 +31,7 @@
 			<div class="span9">
 				<ul class="breadcrumb">
 					<li>
-				    	<a href="${blogurl}">首页</a> <span class="divider">/</span>
+				    	<a href="${siteurl}">首页</a> <span class="divider">/</span>
 				  	</li>
 				  	<#if (post.catalogs?exists && post.catalogs?size > 0)>
 						<li>

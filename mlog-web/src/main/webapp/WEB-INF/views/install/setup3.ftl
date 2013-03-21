@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="${base}/script/jquery-validation/jquery.validate.js"></script>
 	<script type="text/javascript" src="${base}/script/jquery-validation/jquery.metadata.js"></script>
 	
-	<script type="text/javascript" src="${base}/script/mlog.form.js"></script>
+	<script type="text/javascript" src="${base}/script/m-log.js"></script>
 	
 	<script type="text/javascript">
 		String.prototype.startWith = function(s) {
@@ -35,7 +35,7 @@
 			/**
 			 * 验证博客地址的合法性
 			 */
-			$.validator.addMethod("blogurl", function(value, element, params){
+			$.validator.addMethod("siteurl", function(value, element, params){
 				if(!value.startWith("http://") && !value.startWith("https://")) {
 					return false;
 				}
@@ -78,11 +78,11 @@
 							</tr>
 							<tr>
 								<td class="fieldlabel">博客名称：<span style="color:red;">*</span></td>
-								<td class="field"><input type="text" class="textinput" name="blogname" validate="{required:true, messages:{required:'请输入博客名称！'}}" /></td>
+								<td class="field"><input type="text" class="textinput" name="sitename" validate="{required:true, messages:{required:'请输入博客名称！'}}" /></td>
 							</tr>
 							<tr>
 								<td class="fieldlabel">博客地址：<span style="color:red;">*</span></td>
-								<td class="field"><input type="text" class="textinput" name="blogurl" value='${blogurl}' validate="{required:true, blogurl:true, messages:{required:'请输入博客地址！', blogurl:'博客地址格式填写错误！'}}" /></td>
+								<td class="field"><input type="text" class="textinput" name="siteurl" value='${siteurl}' validate="{required:true, siteurl:true, messages:{required:'请输入博客地址！', siteurl:'博客地址格式填写错误！'}}" /></td>
 							</tr>
 							<tr>
 								<td class="fieldlabel">登录名：<span style="color:red;">*</span></td>

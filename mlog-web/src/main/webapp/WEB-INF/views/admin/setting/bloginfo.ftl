@@ -10,7 +10,7 @@
 		<tr>
 			<td class="fieldlabel" style="width:120px;">博客标题:</td>
 			<td>
-				<input type="input" class="textinput" style="width:95%;" name="blogname" value="${blogname!""}" validate="{required:true, maxlength:100, messages:{required:'博客标题必填', maxlength:'博客标题长度不能超过{0}'}}"/>
+				<input type="input" class="textinput" style="width:95%;" name="sitename" value="${sitename!""}" validate="{required:true, maxlength:100, messages:{required:'博客标题必填', maxlength:'博客标题长度不能超过{0}'}}"/>
 			</td>
 			<td class="fieldnotice" style="width:300px;">规则：必填、最大长度100</td>
 		</tr>
@@ -24,7 +24,7 @@
 		<tr>
 			<td class="fieldlabel" style="width:120px;">博客地址:</td>
 			<td>
-				<input type="input" class="textinput" style="width:95%;" name="blogurl" value="${blogurl!""}" validate="{required:true, maxlength:200, blogurl:true, messages:{required:'博客地址必填', maxlength:'博客地址最大长度不能超过{0}', blogurl:'博客地址格式不正确'}}"/>
+				<input type="input" class="textinput" style="width:95%;" name="siteurl" value="${siteurl!""}" validate="{required:true, maxlength:200, siteurl:true, messages:{required:'博客地址必填', maxlength:'博客地址最大长度不能超过{0}', siteurl:'博客地址格式不正确'}}"/>
 			</td>
 			<td class="fieldnotice" style="width:300px;">规则：必填、最大长度200、必须以"http://"或"https://"开头、不能以"/"或"\"结尾</td>
 		</tr>

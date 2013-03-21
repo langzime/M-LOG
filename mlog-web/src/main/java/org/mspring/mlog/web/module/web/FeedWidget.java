@@ -67,8 +67,8 @@ public class FeedWidget extends AbstractWebWidget {
      * @param model
      */
     private void putRssModelInfos(Model model) {
-        String title = optionService.getOption("blogname"); // 频道名称
-        String link = optionService.getOption("blogurl") + "/rss.xml"; // 频道的URL
+        String title = optionService.getOption("sitename"); // 频道名称
+        String link = optionService.getOption("siteurl") + "/rss.xml"; // 频道的URL
         String description = ""; // 频道的描述
         String lanugage = "zh_CN"; // 频道文章所用语言
         String copyright = optionService.getOption("copyright"); // 频道内容的版权说明
@@ -100,9 +100,9 @@ public class FeedWidget extends AbstractWebWidget {
      * @param model
      */
     private void putAtomModelInfos(Model model) {
-        String title = optionService.getOption("blogname"); // 频道名称
+        String title = optionService.getOption("sitename"); // 频道名称
         String subtitle = optionService.getOption("blogsubname");
-        String link = optionService.getOption("blogurl") + "/atom.xml"; // 频道的URL
+        String link = optionService.getOption("siteurl") + "/atom.xml"; // 频道的URL
         String updated = DateFormatUtils.SMTP_DATETIME_FORMAT.format(new Date());
         String rights = optionService.getOption("copyright");
         String generator = Application.ALIAS_NAME;

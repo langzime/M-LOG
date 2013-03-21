@@ -48,7 +48,7 @@
 			<div class="row-fluid">
 				<ul class="breadcrumb">
 					<li>
-						<a href="${blogurl}">首页</a> <span class="divider">/</span>
+						<a href="${siteurl}">首页</a> <span class="divider">/</span>
 				  	</li>
 				  	<li class="active">相册列表</li>
 				</ul>
@@ -57,9 +57,9 @@
 						<#list albumPage.result as album>
 							<div class="album-item">
 								<#if album.cover?exists>
-									<a href="${blogurl}/album/album-${album.id}-1.html" title="${album.description!album.name}"><img class="item-image" src="${base}${album.cover.url}" alt="${album.description!album.name}" /></a>
+									<a href="${siteurl}/album/album-${album.id}-1.html" title="${album.description!album.name}"><img class="item-image" src="${base}${album.cover.url}" alt="${album.description!album.name}" /></a>
 								<#else>
-									<a href="${blogurl}/album/album-${album.id}-1.html" title="${album.description!album.name}"><img class="item-image" src="${base}/images/nophoto.gif" alt="${album.description!album.name}" /></a>
+									<a href="${siteurl}/album/album-${album.id}-1.html" title="${album.description!album.name}"><img class="item-image" src="${base}/images/nophoto.gif" alt="${album.description!album.name}" /></a>
 								</#if>
 								<div class="album-meta">
 									<a href="#" class="album-title">${album.name!""}</a>

@@ -3,11 +3,11 @@
 
 <html>
 <head>
-    <title>${blogname}-微博授权</title>
+    <title>${sitename}-微博授权</title>
 </head>
 
 <body>
-<h1>${blogname} 微博授权</h1>
+<h1>${sitename} 微博授权</h1>
 <h3>第一步. Get User's Authorization</h3></p>
 
 <#if oauthParams?exists && oauthParams.errorMessage?has_content>

@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.mspring.mlog.common.Keys;
+import org.mspring.mlog.common.WebContext;
 import org.mspring.mlog.entity.security.User;
 import org.mspring.platform.core.ContextManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -30,7 +32,11 @@ public class SecurityUtils {
      * @return
      */
     public static UserDetailsImpl getUserDetailsImpl() {
-        Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            return null;
+        }
+        Object obj = auth.getPrincipal();
         if (obj != null && obj instanceof UserDetailsImpl) {
             return (UserDetailsImpl) obj;
         }
@@ -44,11 +50,10 @@ public class SecurityUtils {
      */
     public static User getCurrentUser() {
         UserDetailsImpl userDetailsImpl = getUserDetailsImpl();
-        if (userDetailsImpl == null) {
-            log.error("can't get logined user.");
-            return null;
+        if (userDetailsImpl != null) {
+            return userDetailsImpl.getUserEntity();
         }
-        return userDetailsImpl.getUserEntity();
+        return getCurrentUser(WebContext.getInstance().getRequest());
     }
 
     /**

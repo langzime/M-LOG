@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${blogname} - 404</title>
+<title>${sitename} - 404</title>
 <style> 
 	{
 		PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
@@ -76,7 +76,7 @@
 	<div class=bg>
 		<div class=cont>
 			<div class=c1><img class=img1 src="${base}/images/404.png"></div>
-			<h2>Sorry…${blogname}提醒您访问的页面不存在</h2>
+			<h2>Sorry…${sitename}提醒您访问的页面不存在</h2>
 			<div class=c2>
 				<a class=home href="${base}">返回首页</A>
 				<a class=re href="javascript:history.back();">返回上页</a>

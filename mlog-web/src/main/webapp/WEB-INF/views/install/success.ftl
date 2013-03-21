@@ -22,7 +22,7 @@
 				</div>
 				<div class="bd" style="text-align:center;">
 					<p>恭喜，您的博客已经安装成功！</p>
-					<a href="${blogurl}" target="_blank">访问博客</a>&nbsp;&nbsp;&nbsp;<a href="${blogurl}/admin" target="_blank">访问后台</a>
+					<a href="${siteurl}" target="_blank">访问博客</a>&nbsp;&nbsp;&nbsp;<a href="${siteurl}/admin" target="_blank">访问后台</a>
 				</div>
 			</div>
 			<div class="clear"></div>

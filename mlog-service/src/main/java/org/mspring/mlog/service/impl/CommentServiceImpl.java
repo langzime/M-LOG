@@ -224,8 +224,8 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
         if (comment != null && comment.getParent() != null && StringUtils.isNotBlank(comment.getParent().getEmail())) {
             comment.getPostEager();
 
-            String blogurl = optionService.getOption("blogurl");
-            String commentUrl = blogurl + PostUrlUtils.getPostUrl(comment.getPost());
+            String siteurl = optionService.getOption("siteurl");
+            String commentUrl = siteurl + PostUrlUtils.getPostUrl(comment.getPost());
 
             Map<Object, Object> model = new HashMap<Object, Object>();
             model.put("commentUrl", commentUrl);
@@ -235,7 +235,7 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
             String content = FreemarkerUtils.render(configuration, "mail/comment_reply_notice.ftl", model);
             String to = comment.getParent().getEmail();
             String personal = comment.getParent().getAuthor();
-            String subject = optionService.getOption("blogname") + " - 评论回复通知";
+            String subject = optionService.getOption("sitename") + " - 评论回复通知";
             mailService.sendMail(to, personal, subject, content);
         }
     }
@@ -254,8 +254,8 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
         if (comment != null) {
             comment.getPostEager();
 
-            String blogurl = optionService.getOption("blogurl");
-            String commentUrl = blogurl + PostUrlUtils.getPostUrl(comment.getPost());
+            String siteurl = optionService.getOption("siteurl");
+            String commentUrl = siteurl + PostUrlUtils.getPostUrl(comment.getPost());
 
             model.put("commentUrl", commentUrl);
             model.put("comment", comment);
@@ -264,7 +264,7 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
             String content = FreemarkerUtils.render(configuration, "mail/new_comment_notice.ftl", model);
             String to = comment.getPost().getAuthor().getEmail();
             String personal = comment.getPost().getAuthor().getAlias();
-            String subject = optionService.getOption("blogname") + " - 文章评论通知";
+            String subject = optionService.getOption("sitename") + " - 文章评论通知";
             mailService.sendMail(to, personal, subject, content);
         }
     }

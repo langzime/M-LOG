@@ -76,13 +76,13 @@ public abstract class AbstractInstallService implements InstallService {
      * java.lang.String)
      */
     @Override
-    public void initBlogInfo(String blogname, String blogurl, String username, String alias, String password, String email) {
+    public void initBlogInfo(String sitename, String siteurl, String username, String alias, String password, String email) {
         // TODO Auto-generated method stub
         log.debug("init bloginfo...");
         OptionService optionService = ServiceFactory.getOptionService();
-        optionService.setOption("blogname", blogname);
-        optionService.setOption("blogurl", blogurl);
-        optionService.setOption("blogurl", blogurl);
+        optionService.setOption("sitename", sitename);
+        optionService.setOption("siteurl", siteurl);
+        optionService.setOption("siteurl", siteurl);
 
         User user = new User();
         user.setName(username);

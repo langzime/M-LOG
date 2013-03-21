@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>${blogname} - ${blogsubname}</title>
+<title>${sitename} - ${blogsubname}</title>
 <link href="${template_url}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${template_url}/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="${template_url}/style/style.css" rel="stylesheet">
@@ -48,7 +48,7 @@
 	
 	<header class="jumbotron subhead" id="overview">
   		<div class="container">
-		    <h2>${blogname}</h2>
+		    <h2>${sitename}</h2>
 		    <p class="lead">${blogsubname}</p>
   		</div>
 	</header>

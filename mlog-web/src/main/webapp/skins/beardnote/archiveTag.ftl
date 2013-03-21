@@ -7,7 +7,7 @@
 				<div class="row-fluid">
 					<ul class="breadcrumb">
 						<li>
-							<a href="${blogname}">首页</a> <span class="divider">/</span>
+							<a href="${sitename}">首页</a> <span class="divider">/</span>
 					  	</li>
 					  	<li class="active">TAG：${tagArchiveName}</li>
 					</ul>

@@ -72,19 +72,19 @@
 		<#if postPage.getPageNo() == page>
 			<span class="page-current">${page}</span>
 		<#else>
-			<a class="page" href="${blogurl}/catalog/catalog-${catalogId}-${page}.html" title="${title}">${label}</a>
+			<a class="page" href="${siteurl}/catalog/catalog-${catalogId}-${page}.html" title="${title}">${label}</a>
 		</#if>
 	<#elseif tagId?exists && tagId?has_content>
 		<#if postPage.getPageNo() == page>
 			<span class="page-current">${page}</span>
 		<#else>
-			<a class="page" href="${blogurl}/tag/tag-${tagId}-${page}.html" title="${title}">${label}</a>
+			<a class="page" href="${siteurl}/tag/tag-${tagId}-${page}.html" title="${title}">${label}</a>
 		</#if>
 	<#else>
 		<#if postPage.getPageNo() == page>
 			<span class="page-current">${page}</span>
 		<#else>
-			<a class="page" href="${blogurl}/post/page-${page}.html" title="${title}">${label}</a>
+			<a class="page" href="${siteurl}/post/page-${page}.html" title="${title}">${label}</a>
 		</#if>
 	</#if>
 </#macro>
@@ -163,9 +163,9 @@
 		<span class="page-current">${page}</span>
 	<#else>
 		<#if page == 1>
-			<a class="page" href="${blogurl}/album/list.html" title="${title}">${label}</a>
+			<a class="page" href="${siteurl}/album/list.html" title="${title}">${label}</a>
 		<#else>
-			<a class="page" href="${blogurl}/album/list-${page}.html" title="${title}">${label}</a>
+			<a class="page" href="${siteurl}/album/list-${page}.html" title="${title}">${label}</a>
 		</#if>
 	</#if>
 </#macro>
@@ -245,6 +245,6 @@
 	<#if photoPage.getPageNo() == page>
 		<span class="page-current">${page}</span>
 	<#else>
-		<a class="page" href="${blogurl}/album/album-${album.id}-${page}.html" title="${title}">${label}</a>
+		<a class="page" href="${siteurl}/album/album-${album.id}-${page}.html" title="${title}">${label}</a>
 	</#if>
 </#macro>

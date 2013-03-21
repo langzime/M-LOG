@@ -6,6 +6,12 @@
 	opacity: .25;
 }
 
+.back-right-inner {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+}
+
 .back-left .active {
 	position: relative;
 	z-index: 2;

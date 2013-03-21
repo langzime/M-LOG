@@ -12,6 +12,7 @@ import org.mspring.mlog.service.security.RoleService;
 import org.mspring.mlog.service.security.UserService;
 import org.mspring.mlog.support.resolver.PathParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
+import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,7 +118,7 @@ public class ValidateMethodWidget {
         if (StringUtils.isBlank(name)) {
             return "true";
         }
-        boolean flag = catalogService.catalogExists(name, id);
+        boolean flag = catalogService.catalogExists(name, id, SecurityUtils.getCurrentUser().getId());
         return flag ? "true" : "false";
     }
 

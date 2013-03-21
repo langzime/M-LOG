@@ -3,7 +3,7 @@
 	<title type="text">${title!""}</title>
 	<subtitle type="html">${subtitle!""}</subtitle>
 	<updated>${updated!""}</updated>
-	<id>${blogurl}</id>
+	<id>${siteurl}</id>
 	<link href="${link}" rel="self" type="application/atom+xml" />
 	<rights>${rights!""}</rights>
 	<generator uri="${generator_uri}" version="${generator_version}">${generator}</generator>
@@ -17,7 +17,7 @@
 			<published>${post.createTime}</published>
 			<author>
 				<name>${post.author.alias}</name>
-				<uri>${blogurl}</uri>
+				<uri>${siteurl}</uri>
 				<email>${post.author.email}</email>
 			</author>
 			<#if (post.summary?exists) && (post.summary?trim?length > 0)>

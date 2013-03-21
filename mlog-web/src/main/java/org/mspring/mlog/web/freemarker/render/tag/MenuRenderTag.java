@@ -33,7 +33,7 @@ public class MenuRenderTag extends CacheRenderTag {
         // TODO Auto-generated method stub
         OptionService optionService = ServiceFactory.getOptionService();
         List<String> menus = new ArrayList<String>();
-        String url = optionService.getOption("blogurl");
+        String url = optionService.getOption("siteurl");
 
         // 用户配置menu
         String menuString = optionService.getOption("menu");
