@@ -31,6 +31,25 @@
 }
 
 .back-left .active .icon-chevron-right, .back-left .active a:hover .icon-chevron-right {
-	background-image: url(../images/glyphicons-halflings-white.png);
 	opacity: 1;
+}
+
+.form-table {
+	border:none; 
+	width:100%;
+	padding:0px;
+}
+
+.form-table td {
+	padding: 2px;
+	border:solid 1px red;
+}
+
+.form-table .field-title {
+	width: 80px;
+	text-align:left;
+}
+
+.form-table .field-content {
+	
 }

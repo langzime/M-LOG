@@ -3,7 +3,9 @@
  */
 package org.mspring.mlog.web.module.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +40,17 @@ public class User_PostWidget extends AbstractUserWidget {
     public String create(@ModelAttribute Post post, HttpServletRequest request, HttpServletResponse response, Model model) {
         List<Catalog> catalogs = catalogService.findCatalogByUser(SecurityUtils.getCurrentUser().getId());
         model.addAttribute("catalogs", catalogs);
+
+        // 是否开启评论
+        Map<String, String> commentStatus = new HashMap<String, String>();
+        commentStatus.put(Post.CommentStatus.OPEN, "开启");
+        commentStatus.put(Post.CommentStatus.CLOSE, "关闭");
+        model.addAttribute("commentStatus", commentStatus);
+
+        Map<String, String> isTop = new HashMap<String, String>();
+        isTop.put("true", "是");
+        isTop.put("false", "否");
+        model.addAttribute("isTop", isTop);
         return view("post/create");
     }
 
