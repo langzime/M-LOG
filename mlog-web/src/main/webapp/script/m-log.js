@@ -34,46 +34,53 @@ $.extend(mlog.dialog, {
 	 * @param {} setting.msg 
 	 * @param {} setting.type error, tip, success, warn
 	 */
-	tip : function(setting){
+	tip : function(config){
 		var _this = this;
 		if(typeof($.dialog) === "undefined"){
 			this.loadSupportJS(function(){
-				_this.tip(setting);
+				_this.tip(config);
 			});
 		};
 		if(typeof($.dialog) != "undefined"){
-			if(setting === undefined){
+			if(config === undefined){
 				return;
 			}
-			if (setting.msg === undefined) {
+			if (config.msg === undefined) {
 				return;
 			}
-			if (setting.type === undefined) {
-				setting.type = 'tips.gif';
+			if (config.type === undefined) {
+				config.type = 'loading.gif';
+			}
+			if (config.time === undefined){
+				config.time = 0;
 			}
 			
 			var icon = 'tips.gif';
-			if(setting.type == 'error'){
+			if(config.type == 'error'){
 				icon = 'error.gif';
 			}
-			else if(setting.type == 'success'){
+			else if(config.type == 'success'){
 				icon = 'success.gif';
 			}
-			else if(setting.type == 'warn'){
+			else if(config.type == 'warn'){
 				icon = 'alert.gif';
 			}
-			else {
+			else if(config.type == 'tip') {
 				icon = 'tips.gif';
 			}
+			else {
+				icon = 'loading.gif';
+			}
 			
-			$.dialog({
-				title : false,
-				content : setting.msg,
-				time : 1,
-				min : false,
-				max : false,
-				icon : icon,
-				// cancel: function(){},
+			return $.dialog({
+				title    : false,
+				content  : config.msg,
+				time     : config.time,
+				min      : false,
+				max      : false,
+				icon     : icon,
+				esc      : false,
+				lock     : config.lock === undefined ? false : config.lock,
 				close : function() {
 					var duration = 400, /* 动画时长 */
 					api = this, opt = api.config, wrap = api.DOM.wrap, top = $(window).scrollTop() - wrap[0].offsetHeight;
@@ -140,7 +147,7 @@ $.extend(mlog.dialog, {
 	loadSupportJS : function(callback){
 		//${base}/script/lhgdialog/lhgdialog.min.js
 		mlog.utils.loader.loadJavaScript(mlog.variable.base + '/script/lhgdialog/lhgdialog.min.js', function(){
-			callback();
+			return callback();
 		});
 	}
 });
@@ -588,18 +595,18 @@ $.extend(mlog.utils.loader, {
             script.type = "text/javascript";  
             document.getElementsByTagName("head")[0].appendChild(script);  
             if( script.addEventListener ) {
-                script.addEventListener("load", callback, false);  
+                script.addEventListener("load", callback, false);
             } else if(script.attachEvent) {
                 script.attachEvent("onreadystatechange", function(){  
                         if(script.readyState == 4  
                             || script.readyState == 'complete'  
                             || script.readyState == 'loaded') {  
-                            callback();  
+                            return callback();
                         }
                 });  
             }
         } catch(e) {
-            callback();  
+            return callback();
         }
     },
     
@@ -629,7 +636,6 @@ $.extend(mlog.utils.loader, {
 		}
 		//默认同步加载JS文件
 		if(setting.async === undefined) setting.async = false;
-		
 		
 		$.ajax({
             url: setting.url,

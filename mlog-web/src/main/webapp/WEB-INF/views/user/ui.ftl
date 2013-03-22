@@ -42,6 +42,11 @@
 	<!--[if IE 6]>
 	<script src="${base}/script/killie6/killie6.js"></script>
 	<![endif]-->
+	<style type="text/css">
+		body {
+			font-family: Arial, 'Microsoft YaHei';
+		}
+	</style>
 	</head>
 	<body>
 	    <style type="text/css">

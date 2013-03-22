@@ -2107,19 +2107,7 @@
     <mobile:mobile/>
   </url>
   <url>
-    <loc>http://localhost:8080/mlog-web/post/324.html</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>http://localhost:8080/mlog-web/post/323.html</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <mobile:mobile/>
-  </url>
-  <url>
-    <loc>http://localhost:8080/mlog-web/post/325.html</loc>
+    <loc>http://localhost:8080/mlog-web/post/365.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>

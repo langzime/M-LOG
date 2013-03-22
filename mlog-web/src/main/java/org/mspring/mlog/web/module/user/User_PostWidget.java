@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mspring.mlog.entity.Catalog;
 import org.mspring.mlog.entity.Post;
+import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.CatalogService;
 import org.mspring.mlog.service.PostService;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
@@ -42,6 +43,12 @@ public class User_PostWidget extends AbstractUserWidget {
 
     @RequestMapping("/create/save")
     public String create_save(@ModelAttribute Post post, HttpServletRequest request, HttpServletResponse response, Model model) {
-        return view("");
+        User user = SecurityUtils.getCurrentUser(request);
+        if (post.getAuthor() == null) {
+            post.setAuthor(user);
+        }
+        post.setPostIp(request.getRemoteAddr());
+        postService.createPost(post);
+        return "redirect:/user/post/create";
     }
 }

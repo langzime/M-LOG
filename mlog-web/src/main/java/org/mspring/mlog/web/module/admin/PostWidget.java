@@ -4,7 +4,6 @@
 package org.mspring.mlog.web.module.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,8 +79,7 @@ public class PostWidget extends AbstractAdminWidget {
 			queryParams.put("status", Post.Status.PUBLISH);
 		}
 
-		postPage = postService.findPost(postPage, new PostQueryCriterion(
-				queryParams));
+		postPage = postService.findPost(postPage, new PostQueryCriterion(queryParams));
 		model.addAttribute("postPage", postPage);
 		model.addAttribute("status", Post.Status.getStatusMap());
 		return "/admin/post/listPost";
