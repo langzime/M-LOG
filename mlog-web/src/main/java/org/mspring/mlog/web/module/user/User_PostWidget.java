@@ -86,6 +86,7 @@ public class User_PostWidget extends AbstractUserWidget {
             post.setStatus(Post.Status.PUBLISH);
             queryParams.put("status", Post.Status.PUBLISH);
         }
+        queryParams.put("author.id", SecurityUtils.getCurrentUser(request).getId());
 
         postPage = postService.findPost(postPage, new PostQueryCriterion(queryParams));
         model.addAttribute("postPage", postPage);
