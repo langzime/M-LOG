@@ -4,7 +4,7 @@
 			<ul class="nav nav-tabs nav-stacked">
 				<li <#if active="个人中心">class="active"</#if>><a href="${base}/user/profile">个人中心<i class="icon-chevron-right"></i></a></li>
 				<li <#if active="发表文章">class="active"</#if>><a href="${base}/user/post/create">发表文章<i class="icon-chevron-right"></i></a></li>
-				<li><a href="${base}/user/post/list">文章管理<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="文章管理">class="active"</#if>><a href="${base}/user/post/list">文章管理<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/drafts">草稿箱&nbsp;&nbsp;<span class="badge badge-info">0</span><i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/post-categories">分类管理<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/comments">博客评论<i class="icon-chevron-right"></i></a></li>

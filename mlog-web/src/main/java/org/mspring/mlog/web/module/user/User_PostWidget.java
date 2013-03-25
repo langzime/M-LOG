@@ -15,8 +15,13 @@ import org.mspring.mlog.entity.Post;
 import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.CatalogService;
 import org.mspring.mlog.service.PostService;
+import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
+import org.mspring.mlog.web.module.admin.query.PostQueryCriterion;
 import org.mspring.mlog.web.security.SecurityUtils;
+import org.mspring.platform.persistence.support.Page;
+import org.mspring.platform.persistence.support.Sort;
+import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -63,5 +68,28 @@ public class User_PostWidget extends AbstractUserWidget {
         post.setPostIp(request.getRemoteAddr());
         postService.createPost(post);
         return "redirect:/user/post/create";
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping("/list")
+    public String list(@ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (postPage == null) {
+            postPage = new Page<Post>();
+        }
+        postPage.setSort(new Sort("isTop desc, id desc", ""));
+
+        // 默认查看已发布的文章
+        if (post == null) {
+            post = new Post();
+        }
+        if (queryParams.get("status") == null || StringUtils.isBlank(queryParams.get("status").toString())) {
+            post.setStatus(Post.Status.PUBLISH);
+            queryParams.put("status", Post.Status.PUBLISH);
+        }
+
+        postPage = postService.findPost(postPage, new PostQueryCriterion(queryParams));
+        model.addAttribute("postPage", postPage);
+        model.addAttribute("status", Post.Status.getStatusMap());
+        return "/user/post/list";
     }
 }

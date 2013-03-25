@@ -34,22 +34,33 @@
 	opacity: 1;
 }
 
-.form-table {
-	border:none; 
-	width:100%;
-	padding:0px;
+/*  box  */
+.widget-box {
+	position: relative;
+	/*padding: 39px 19px 14px;*/
+	padding: 27px 0px 0px 14px;
+	margin-bottom: 10px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
-
-.form-table td {
-	padding: 2px;
-	border:solid 1px red;
+.widget-box .widget-title {
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	padding: 3px 0px;
+	width: 100%;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #f5f5f5;
+	border: 1px solid #ddd;
+	color: #9da0a4;
+	-webkit-border-radius: 4px 4px 0px 0;
+	-moz-border-radius: 4px 4px 0px 0;
+	border-radius: 4px 4px 0px 0;
 }
-
-.form-table .field-title {
-	width: 80px;
-	text-align:left;
-}
-
-.form-table .field-content {
-	
+.widget-box .widget-content {
+	overflow:auto;
 }

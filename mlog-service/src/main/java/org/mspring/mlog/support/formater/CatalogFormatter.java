@@ -33,11 +33,11 @@ public class CatalogFormatter implements Formatter<Object> {
         // TODO Auto-generated method stub
         StringBuffer result = new StringBuffer();
         if (obj != null) {
-            if (obj instanceof Catalog) { // 如果输出对象是一个Tag对象
+            if (obj instanceof Catalog) { // 如果输出对象是一个Catalog对象
                 Catalog catalog = (Catalog) obj;
                 result.append(catalog.getName());
             }
-            else if (obj instanceof Set) { // 如果输出对象是一个tag的集合
+            else if (obj instanceof Set) { // 如果输出对象是一个Catalog的集合
                 Set<Catalog> tagSet = (Set<Catalog>) obj;
                 int i = 0;
                 for (Catalog catalog : tagSet) {
@@ -48,7 +48,7 @@ public class CatalogFormatter implements Formatter<Object> {
                     i++;
                 }
             }
-            else if (obj instanceof List) { // 如果输出对象是一个tag集合
+            else if (obj instanceof List) { // 如果输出对象是一个Catalog集合
                 List<Catalog> tagList = (List<Catalog>) obj;
                 int i = 0;
                 for (Catalog catalog : tagList) {
