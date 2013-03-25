@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.admin.query;
+package org.mspring.mlog.web.query;
 
 import java.util.Map;
 
@@ -9,12 +9,13 @@ import org.mspring.platform.persistence.query.AbstractQueryCriterion;
 import org.mspring.platform.persistence.query.QueryBuilder;
 
 /**
- * @author Gao Youbo
- * @since 2012-11-22
- * @Description
+ * @author Administrator
+ * @since Gao Youbo
+ * @description
  * @TODO
  */
-public class PhotoQueryCriterion extends AbstractQueryCriterion {
+public class PageQueryCriterion extends AbstractQueryCriterion {
+
     private String queryString;
     private String countString;
     private String whereString;
@@ -22,19 +23,17 @@ public class PhotoQueryCriterion extends AbstractQueryCriterion {
     /**
      * 
      */
-    @SuppressWarnings("rawtypes")
-    public PhotoQueryCriterion(Map queryParams) {
+    public PageQueryCriterion(Map queryParams) {
         // TODO Auto-generated constructor stub
         QueryBuilder builder = new QueryBuilder(queryParams);
         builder.startBuild();
-        builder.buildEqual("photo.album.id", "album.id", Long.class);
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();
         queryParamsString = builder.getQueryParamsAsString();
 
-        queryString = "select photo from Photo photo ";
-        countString = "select count(*) from Photo photo ";
+        queryString = "select page from Page page ";
+        countString = "select count(*) from Page page ";
     }
 
     /*

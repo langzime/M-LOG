@@ -13,7 +13,7 @@ import org.mspring.mlog.service.security.ResourceService;
 import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.admin.query.ResourceQueryCriterion;
+import org.mspring.mlog.web.query.ResourceQueryCriterion;
 import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.persistence.support.Sort;

@@ -1,20 +1,21 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.admin.query;
+package org.mspring.mlog.web.query;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.mspring.platform.persistence.query.AbstractQueryCriterion;
 import org.mspring.platform.persistence.query.QueryBuilder;
 
 /**
- * @author Gao Youbo
- * @since 2012-8-8
- * @Description
+ * @author Administrator
+ * @since Gao Youbo
+ * @description
  * @TODO
  */
-public class CatalogQueryCriterion extends AbstractQueryCriterion {
+public class LogQueryCriterion extends AbstractQueryCriterion {
 
     private String queryString;
     private String countString;
@@ -23,27 +24,21 @@ public class CatalogQueryCriterion extends AbstractQueryCriterion {
     /**
      * 
      */
-    @SuppressWarnings("rawtypes")
-    public CatalogQueryCriterion(Map queryParams) {
+    public LogQueryCriterion(Map queryParams) {
         // TODO Auto-generated constructor stub
         QueryBuilder builder = new QueryBuilder(queryParams);
         builder.startBuild();
-        builder.buildLike("catalog.name", "name");
-        
-        Object parent = queryParams.get("parent.id");
-        if (parent != null && "0".equals(parent.toString())) {
-            builder.buildString("and catalog.parent is null");
-        }
-        else {
-            builder.buildEqual("catalog.parent.id", "parent.id", Long.class);
-        }
+        builder.buildLike("log.className", "className");
+        builder.buildLike("log.methodName", "methodName");
+        builder.buildLike("log.user.name", "user.name");
+        builder.buildBetween("log.actionTime", "actionTimeBeg", "actionTimeEnd", Date.class);
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();
         queryParamsString = builder.getQueryParamsAsString();
 
-        queryString = "select catalog from Catalog catalog ";
-        countString = "select count(*) from Catalog catalog ";
+        queryString = "select log from Log log ";
+        countString = "select count(*) from Log log ";
     }
 
     /*

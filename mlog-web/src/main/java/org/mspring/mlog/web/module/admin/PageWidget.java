@@ -13,7 +13,7 @@ import org.mspring.mlog.service.PageService;
 import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.admin.query.PageQueryCriterion;
+import org.mspring.mlog.web.query.PageQueryCriterion;
 import org.mspring.platform.persistence.support.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

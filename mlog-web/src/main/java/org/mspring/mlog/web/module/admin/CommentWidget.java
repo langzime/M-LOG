@@ -14,7 +14,7 @@ import org.mspring.mlog.service.CommentService;
 import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.admin.query.CommentQueryCriterion;
+import org.mspring.mlog.web.query.CommentQueryCriterion;
 import org.mspring.platform.persistence.query.QueryCriterion;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.persistence.support.Sort;

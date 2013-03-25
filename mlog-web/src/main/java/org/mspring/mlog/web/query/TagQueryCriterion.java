@@ -1,4 +1,4 @@
-package org.mspring.mlog.web.module.admin.query;
+package org.mspring.mlog.web.query;
 
 import java.util.Map;
 

@@ -16,7 +16,7 @@ import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.utils.CatalogUtils;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.admin.query.CatalogQueryCriterion;
+import org.mspring.mlog.web.query.CatalogQueryCriterion;
 import org.mspring.platform.persistence.support.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

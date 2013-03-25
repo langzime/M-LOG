@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.admin.query;
+package org.mspring.mlog.web.query;
 
 import java.util.Map;
 
@@ -10,12 +10,11 @@ import org.mspring.platform.persistence.query.QueryBuilder;
 
 /**
  * @author Gao Youbo
- * @since 2012-8-8
+ * @since 2012-11-22
  * @Description
  * @TODO
  */
-public class LinkQueryCriterion extends AbstractQueryCriterion {
-
+public class PhotoQueryCriterion extends AbstractQueryCriterion {
     private String queryString;
     private String countString;
     private String whereString;
@@ -24,21 +23,18 @@ public class LinkQueryCriterion extends AbstractQueryCriterion {
      * 
      */
     @SuppressWarnings("rawtypes")
-    public LinkQueryCriterion(Map queryParams) {
+    public PhotoQueryCriterion(Map queryParams) {
         // TODO Auto-generated constructor stub
         QueryBuilder builder = new QueryBuilder(queryParams);
         builder.startBuild();
-        builder.buildEqual("link.visable", "visable", Boolean.class);
-        builder.buildLike("link.name", "name");
-        builder.buildLike("link.url", "url");
-        builder.buildEqual("link.type.id", "type.id", Long.class);
+        builder.buildEqual("photo.album.id", "album.id", Long.class);
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();
         queryParamsString = builder.getQueryParamsAsString();
 
-        queryString = "select link from Link link ";
-        countString = "select count(*) from Link link ";
+        queryString = "select photo from Photo photo ";
+        countString = "select count(*) from Photo photo ";
     }
 
     /*

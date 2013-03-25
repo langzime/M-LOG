@@ -1,21 +1,20 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.admin.query;
+package org.mspring.mlog.web.query;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.mspring.platform.persistence.query.AbstractQueryCriterion;
 import org.mspring.platform.persistence.query.QueryBuilder;
 
 /**
- * @author Administrator
- * @since Gao Youbo
- * @description
+ * @author Gao Youbo
+ * @since 2012-8-8
+ * @Description
  * @TODO
  */
-public class LogQueryCriterion extends AbstractQueryCriterion {
+public class LinkQueryCriterion extends AbstractQueryCriterion {
 
     private String queryString;
     private String countString;
@@ -24,21 +23,22 @@ public class LogQueryCriterion extends AbstractQueryCriterion {
     /**
      * 
      */
-    public LogQueryCriterion(Map queryParams) {
+    @SuppressWarnings("rawtypes")
+    public LinkQueryCriterion(Map queryParams) {
         // TODO Auto-generated constructor stub
         QueryBuilder builder = new QueryBuilder(queryParams);
         builder.startBuild();
-        builder.buildLike("log.className", "className");
-        builder.buildLike("log.methodName", "methodName");
-        builder.buildLike("log.user.name", "user.name");
-        builder.buildBetween("log.actionTime", "actionTimeBeg", "actionTimeEnd", Date.class);
+        builder.buildEqual("link.visable", "visable", Boolean.class);
+        builder.buildLike("link.name", "name");
+        builder.buildLike("link.url", "url");
+        builder.buildEqual("link.type.id", "type.id", Long.class);
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();
         queryParamsString = builder.getQueryParamsAsString();
 
-        queryString = "select log from Log log ";
-        countString = "select count(*) from Log log ";
+        queryString = "select link from Link link ";
+        countString = "select count(*) from Link link ";
     }
 
     /*

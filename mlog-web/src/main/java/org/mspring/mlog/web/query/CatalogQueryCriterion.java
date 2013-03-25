@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.admin.query;
+package org.mspring.mlog.web.query;
 
 import java.util.Map;
 
@@ -10,11 +10,11 @@ import org.mspring.platform.persistence.query.QueryBuilder;
 
 /**
  * @author Gao Youbo
- * @since 2012-7-27
+ * @since 2012-8-8
  * @Description
  * @TODO
  */
-public class CommentQueryCriterion extends AbstractQueryCriterion {
+public class CatalogQueryCriterion extends AbstractQueryCriterion {
 
     private String queryString;
     private String countString;
@@ -24,20 +24,26 @@ public class CommentQueryCriterion extends AbstractQueryCriterion {
      * 
      */
     @SuppressWarnings("rawtypes")
-    public CommentQueryCriterion(Map queryParams) {
+    public CatalogQueryCriterion(Map queryParams) {
         // TODO Auto-generated constructor stub
         QueryBuilder builder = new QueryBuilder(queryParams);
-        builder.startBuild().buildEqual("comment.status", "status");
-        builder.buildLike("comment.author", "author");
-        builder.buildLike("comment.content", "content");
-        builder.buildLike("comment.post.title", "post.title");
+        builder.startBuild();
+        builder.buildLike("catalog.name", "name");
+        
+        Object parent = queryParams.get("parent.id");
+        if (parent != null && "0".equals(parent.toString())) {
+            builder.buildString("and catalog.parent is null");
+        }
+        else {
+            builder.buildEqual("catalog.parent.id", "parent.id", Long.class);
+        }
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();
         queryParamsString = builder.getQueryParamsAsString();
 
-        queryString = "select comment from Comment comment " + whereString;
-        countString = "select count(*) from Comment comment " + whereString;
+        queryString = "select catalog from Catalog catalog ";
+        countString = "select count(*) from Catalog catalog ";
     }
 
     /*
@@ -49,7 +55,7 @@ public class CommentQueryCriterion extends AbstractQueryCriterion {
     @Override
     public String getQueryString() {
         // TODO Auto-generated method stub
-        return queryString;
+        return queryString + whereString;
     }
 
     /*
@@ -61,7 +67,7 @@ public class CommentQueryCriterion extends AbstractQueryCriterion {
     @Override
     public String getCountString() {
         // TODO Auto-generated method stub
-        return countString;
+        return countString + whereString;
     }
 
 }
