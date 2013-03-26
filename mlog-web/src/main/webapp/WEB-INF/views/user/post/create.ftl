@@ -83,6 +83,7 @@
 	    				success: function(){
 	    					tip.close();
 	    					$(_this).button('reset');
+	    					window.location = '${base}/user/post/list';
 	    				}
 	    			});
     			}

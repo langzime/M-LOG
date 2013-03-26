@@ -60,10 +60,20 @@
 						</#list>
 					</#if>
 				</table>
+				<div style="float:left;">
+					<input type="button" class="btn btn-danger" value="废弃" id="btn_delete"/>
+				</div>
 				<div style="float:right;">
 					<@mspring.pagingnavigator page=postPage form_id="postForm" />
 				</div>
 	    	</form>
 		</div>
     </div>
+    <script type="text/javascript">
+    	$(function(){
+    		$("#btn_delete").click(function(){
+    			mlog.form.confirmSubmit('postForm', '${base}/user/post/trash', '确认要废弃选中的文章吗？');
+    		});
+    	});
+    </script>
 <#include "../footer.ftl" />

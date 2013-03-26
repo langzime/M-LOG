@@ -63,4 +63,5 @@
 }
 .widget-box .widget-content {
 	overflow:auto;
+	padding-top: 10px;
 }

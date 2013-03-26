@@ -3,3 +3,6 @@ mspring-platform/target
 target
 mlog.log
 mlog-web/src/main/webapp/uploads
+mlog-web/src/main/webapp/sitemap_google_mobile.xml
+mlog-web/src/main/webapp/sitemap_google.xml
+mlog-web/src/main/webapp/sitemap.xml

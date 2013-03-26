@@ -136,7 +136,7 @@ public class PostWidget extends AbstractAdminWidget {
 			@QueryParam Map queryParams, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		if (id != null && id.length > 0) {
-			postService.discardPost(id);
+			postService.trash(id);
 		}
 		return listPost(postPage, post, queryParams, request, response, model);
 	}

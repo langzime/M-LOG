@@ -29,7 +29,7 @@ public interface PostService {
      * 
      * @param idArray
      */
-    void discardPost(Long... idArray);
+    void trash(Long... idArray);
 
     /**
      * 将文章从回收站移入已发布(从回收站恢复文章)
