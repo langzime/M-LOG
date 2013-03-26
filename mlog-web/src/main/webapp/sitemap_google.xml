@@ -2868,4 +2868,12 @@
       <codesearch:filetype>html</codesearch:filetype>
     </codesearch:codesearch>
   </url>
+  <url>
+    <loc>http://localhost:8080/mlog-web/post/383.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <codesearch:codesearch>
+      <codesearch:filetype>html</codesearch:filetype>
+    </codesearch:codesearch>
+  </url>
 </urlset>

@@ -15,6 +15,7 @@ import org.mspring.mlog.entity.Post;
 import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.CatalogService;
 import org.mspring.mlog.service.PostService;
+import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
 import org.mspring.mlog.web.query.PostQueryCriterion;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Gao Youbo
@@ -92,5 +94,16 @@ public class User_PostWidget extends AbstractUserWidget {
         model.addAttribute("postPage", postPage);
         model.addAttribute("status", Post.Status.getStatusMap());
         return "/user/post/list";
+    }
+    
+    @RequestMapping("/delete")
+    public String deletePost(@RequestParam(required = false) Long[] id,
+            @ModelAttribute Page<Post> postPage, @ModelAttribute Post post,
+            @QueryParam Map queryParams, HttpServletRequest request,
+            HttpServletResponse response, Model model) {
+        if (id != null && id.length > 0) {
+            postService.deletePost(id);
+        }
+        return list(postPage, post, queryParams, request, response, model);
     }
 }
