@@ -31,7 +31,6 @@
 	<meta charset="utf-8">
 	<title>${title} - ${sitename}</title>
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="${base}/style/global.css">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="${base}/style/user.css" rel="stylesheet">
 	<script type="text/javascript" src="${base}/script/jquery.js"></script>
