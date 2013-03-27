@@ -119,9 +119,10 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
         if (id == null) {
             return;
         }
-        Object entity = loadById(entityClass, id);
-        if (null != entity) {
-            super.delete(entity);
+        try {
+            super.delete(loadById(entityClass, id));
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 
@@ -192,8 +193,7 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
                 if (page.isAutoCount()) {
                     applyPagination(page, queryObject, count(applyCountPrefix(queryString), null));
                     page.setAutoCount(false);
-                }
-                else {
+                } else {
                     applyPagination(page, queryObject);
                 }
                 page.setResult(queryObject.list());
@@ -206,23 +206,25 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
     // Convenience finder methods for HQL strings
     // -------------------------------------------------------------------------
     public Page findPage(final String queryString, final Page page) throws DataAccessException {
-//        return (Page) execute(new HibernateCallback() {
-//            public Object doInHibernate(Session session) throws HibernateException, SQLException {
-//                String queryStringValue = applyPaginationSorter(page, queryString);
-//                Query queryObject = session.createQuery(queryStringValue);
-//                prepareQuery(queryObject);
-//
-//                if (page.isAutoCount()) {
-//                    applyPagination(page, queryObject, count(applyCountPrefix(queryString), null));
-//                    page.setAutoCount(false);
-//                }
-//                else {
-//                    applyPagination(page, queryObject);
-//                }
-//                page.setResult(queryObject.list());
-//                return page;
-//            }
-//        });
+        // return (Page) execute(new HibernateCallback() {
+        // public Object doInHibernate(Session session) throws
+        // HibernateException, SQLException {
+        // String queryStringValue = applyPaginationSorter(page, queryString);
+        // Query queryObject = session.createQuery(queryStringValue);
+        // prepareQuery(queryObject);
+        //
+        // if (page.isAutoCount()) {
+        // applyPagination(page, queryObject,
+        // count(applyCountPrefix(queryString), null));
+        // page.setAutoCount(false);
+        // }
+        // else {
+        // applyPagination(page, queryObject);
+        // }
+        // page.setResult(queryObject.list());
+        // return page;
+        // }
+        // });
         return findPage(queryString, page, null);
     }
 
@@ -233,14 +235,13 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
 
                 Query queryObject = session.createQuery(queryStringValue);
                 prepareQuery(queryObject);
-                
+
                 setParametersToQuery(queryObject, values);
-                
+
                 if (page.isAutoCount()) {
                     applyPagination(page, queryObject, count(applyCountPrefix(queryString), values));
                     page.setAutoCount(false);
-                }
-                else {
+                } else {
                     applyPagination(page, queryObject);
                 }
                 page.setResult(queryObject.list());
@@ -261,12 +262,11 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
                 // applyPagination(ps, queryObject, ((Integer)
                 // countObject.iterate().next()).intValue());
                 // change from Integer to Long
-                
+
                 if (page.isAutoCount()) {
                     applyPagination(page, queryObject, ((Long) countObject.iterate().next()).intValue());
                     page.setAutoCount(false);
-                }
-                else {
+                } else {
                     applyPagination(page, queryObject);
                 }
                 page.setResult(queryObject.list());
@@ -285,7 +285,7 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
             }
         });
     }
-    
+
     public Object findUnique(String queryString) {
         // TODO Auto-generated method stub
         return findUnique(queryString, null);
@@ -432,8 +432,7 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
         if (queryString.toLowerCase().indexOf("order by") > -1) {
             // TODO queryString 中含有 order by using regular pattern, just return
             return queryString;
-        }
-        else {
+        } else {
             return new StringBuffer(queryString).append(" order by ").append(sort.getField()).append(" ").append(sort.getOrder()).toString();
         }
     }
@@ -449,7 +448,7 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
         }
         return queryString;
     }
-    
+
     protected void setParametersToQuery(Query query, Object... values) {
         if (values != null && values.length > 0) {
             for (int i = 0; i < values.length; i++) {
@@ -468,7 +467,8 @@ public class DefaultHibernateTemplate extends HibernateTemplate {
     }
 
     private void applyPagination(Page page, Query queryObject, int totalCount) {
-        if (page == null) return;
+        if (page == null)
+            return;
         Assert.notNull(queryObject);
 
         if (log.isDebugEnabled()) {

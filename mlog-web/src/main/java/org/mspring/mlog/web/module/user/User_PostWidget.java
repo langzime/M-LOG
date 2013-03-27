@@ -21,11 +21,11 @@ import org.mspring.mlog.web.query.PostQueryCriterion;
 import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.persistence.support.Sort;
-import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget
 @RequestMapping("/user/post")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class User_PostWidget extends AbstractUserWidget {
     @Autowired
     private CatalogService catalogService;
@@ -60,7 +61,7 @@ public class User_PostWidget extends AbstractUserWidget {
         return view("post/create");
     }
 
-    @RequestMapping("/create/save")
+    @RequestMapping(value = "/create/save", method = RequestMethod.POST)
     public String create_save(@ModelAttribute Post post, HttpServletRequest request, HttpServletResponse response, Model model) {
         User user = SecurityUtils.getCurrentUser(request);
         if (post.getAuthor() == null) {
@@ -71,57 +72,10 @@ public class User_PostWidget extends AbstractUserWidget {
         return "redirect:/user/post/create";
     }
 
-    @SuppressWarnings("rawtypes")
     @RequestMapping("/list")
     public String list(@ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
-        if (postPage == null) {
-            postPage = new Page<Post>();
-        }
-        postPage.setSort(new Sort("isTop desc, id desc", ""));
-        // 默认查看已发布的文章
-        if (post == null) {
-            post = new Post();
-        }
-        if (queryParams.get("status") == null || StringUtils.isBlank(queryParams.get("status").toString())) {
-            post.setStatus(Post.Status.PUBLISH);
-            queryParams.put("status", Post.Status.PUBLISH);
-        }
-        queryParams.put("author.id", SecurityUtils.getCurrentUser(request).getId());
+        postPage = getPage(postPage, post, queryParams, Post.Status.PUBLISH);
 
-        postPage = postService.findPost(postPage, new PostQueryCriterion(queryParams));
-        model.addAttribute("postPage", postPage);
-        model.addAttribute("status", Post.Status.getStatusMap());
-        return "/user/post/list";
-    }
-    
-    /**
-     * 草稿箱
-     * @param postPage
-     * @param post
-     * @param queryParams
-     * @param request
-     * @param response
-     * @param model
-     * @return
-     */
-    @RequestMapping("/drafts")
-    public String drafts(@ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
-        if (postPage == null) {
-            postPage = new Page<Post>();
-        }
-        postPage.setSort(new Sort("isTop desc, id desc", ""));
-
-        // 默认查看已发布的文章
-        if (post == null) {
-            post = new Post();
-        }
-        if (queryParams.get("status") == null || StringUtils.isBlank(queryParams.get("status").toString())) {
-            post.setStatus(Post.Status.PUBLISH);
-            queryParams.put("status", Post.Status.DRAFT);
-        }
-        queryParams.put("author.id", SecurityUtils.getCurrentUser(request).getId());
-
-        postPage = postService.findPost(postPage, new PostQueryCriterion(queryParams));
         model.addAttribute("postPage", postPage);
         model.addAttribute("status", Post.Status.getStatusMap());
         return "/user/post/list";
@@ -139,11 +93,139 @@ public class User_PostWidget extends AbstractUserWidget {
      * @param model
      * @return
      */
-    @RequestMapping("/trash")
+    @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public String trash(@RequestParam(required = false) Long[] id, @ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
         if (id != null && id.length > 0) {
             postService.trash(id);
         }
         return list(postPage, post, queryParams, request, response, model);
     }
+
+    /**
+     * 草稿箱
+     * 
+     * @param postPage
+     * @param post
+     * @param queryParams
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/drafts")
+    public String drafts(@ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+        postPage = getPage(postPage, post, queryParams, Post.Status.DRAFT);
+
+        model.addAttribute("postPage", postPage);
+        model.addAttribute("status", Post.Status.getStatusMap());
+        return "/user/post/drafts";
+    }
+
+    /**
+     * 删除草稿
+     * 
+     * @param id
+     * @param postPage
+     * @param post
+     * @param queryParams
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/delete_drafts", method = RequestMethod.POST)
+    public String delete_drafts(@RequestParam(required = false) Long[] id, @ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (id != null && id.length > 0) {
+            postService.deletePost(id);
+        }
+        return drafts(postPage, post, queryParams, request, response, model);
+    }
+
+    /**
+     * 回收站
+     * 
+     * @param postPage
+     * @param post
+     * @param queryParams
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/trash")
+    public String trash(@ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+
+        postPage = getPage(postPage, post, queryParams, Post.Status.TRASH);
+
+        model.addAttribute("postPage", postPage);
+        model.addAttribute("status", Post.Status.getStatusMap());
+        return "/user/post/trash";
+    }
+
+    /**
+     * 删除回收站文章
+     * 
+     * @param id
+     * @param postPage
+     * @param post
+     * @param queryParams
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/delete_trash", method = RequestMethod.POST)
+    public String delete_trash(@RequestParam(required = false) Long[] id, @ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (id != null && id.length > 0) {
+            postService.deletePost(id);
+        }
+        return trash(postPage, post, queryParams, request, response, model);
+    }
+
+    /**
+     * 回收站文章恢复正常
+     * 
+     * @param id
+     * @param postPage
+     * @param post
+     * @param queryParams
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/publish", method = RequestMethod.POST)
+    public String publish(@RequestParam(required = false) Long[] id, @ModelAttribute Page<Post> postPage, @ModelAttribute Post post, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+        if (id != null && id.length > 0) {
+            postService.trash2Publish(id);
+        }
+        return trash(postPage, post, queryParams, request, response, model);
+    }
+
+    /**
+     * 获取Page
+     * 
+     * @param postPage
+     * @param post
+     * @param queryParams
+     * @param status
+     * @return
+     */
+    private Page<Post> getPage(Page<Post> postPage, Post post, Map queryParams, String status) {
+        if (postPage == null) {
+            postPage = new Page<Post>();
+        }
+        postPage.setSort(new Sort("isTop desc, id desc", ""));
+
+        if (post == null) {
+            post = new Post();
+        }
+
+        post.setStatus(status);
+        queryParams.put("status", status);
+
+        queryParams.put("author.id", SecurityUtils.getCurrentUser().getId());
+        return postService.findPost(postPage, new PostQueryCriterion(queryParams));
+    }
+
 }

@@ -12,6 +12,7 @@
 	    	<form action="${base}/user/post/create/save" method="post" class="form-vertical" id="post_form">
 	    		<@spring.bind "post" />
 		    	<div class="span8">
+		    		<@spring.formHiddenInput path="post.status" />
 			    	<@spring.formInput path="post.title" attributes='maxlength="80" style="width:98%;" placeholder="此处输入文章标题" validate=\'{required:true, messages:{required:"请输入文章标题"}}\''/>
 			    	<@spring.formTextarea path="post.content" attributes='style="width: 100%; height: 450px; display: none;"' />
 		    	</div>
@@ -71,6 +72,7 @@
 		});
 		
     	$(function(){
+    		//发表
     		$('#post_add').click(function(){
     			if($("#post_form").valid()){
     				var _this = this;
@@ -87,6 +89,23 @@
 	    				}
 	    			});
     			}
+    		});
+    		
+    		$('#save_as_draft').click(function(){
+    			var _this = this;
+				$(_this).button('loading');
+    			var tip = mlog.dialog.tip({
+    				msg : '正在提交...',
+    				lock : true
+    			});
+    			$('#status').val('draft');
+    			$('#post_form').ajaxSubmit({
+    				success: function(){
+    					tip.close();
+    					$(_this).button('reset');
+    					window.location = '${base}/user/post/drafts';
+    				}
+    			});
     		});
     	});
     	
