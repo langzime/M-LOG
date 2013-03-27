@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.web;
+package org.mspring.mlog.web.module.blog;
 
 import java.util.Date;
 import java.util.List;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget("webCommentWidget")
 @RequestMapping("/comment")
-public class CommentWidget extends AbstractWebWidget {
+public class CommentWidget extends AbstractBlogWidget {
     @Autowired
     private CommentService commentService;
     @Autowired

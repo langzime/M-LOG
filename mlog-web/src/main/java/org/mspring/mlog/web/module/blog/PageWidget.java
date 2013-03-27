@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.web;
+package org.mspring.mlog.web.module.blog;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,7 +29,7 @@ import freemarker.template.SimpleHash;
  * @TODO
  */
 @Widget("webPageWidget")
-public class PageWidget extends AbstractWebWidget {
+public class PageWidget extends AbstractBlogWidget {
     @Autowired
     private PageService pageService;
 

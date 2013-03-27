@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.web;
+package org.mspring.mlog.web.module.blog;
 
 import java.io.IOException;
 import java.io.PrintWriter;

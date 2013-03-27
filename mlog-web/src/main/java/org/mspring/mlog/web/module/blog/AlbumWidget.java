@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.web;
+package org.mspring.mlog.web.module.blog;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget("webAlbumWidget")
 @RequestMapping("/album")
-public class AlbumWidget extends AbstractWebWidget {
+public class AlbumWidget extends AbstractBlogWidget {
     @Autowired
     private OptionService optionService;
     @Autowired

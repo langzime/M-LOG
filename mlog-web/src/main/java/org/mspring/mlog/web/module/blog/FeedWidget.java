@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.web;
+package org.mspring.mlog.web.module.blog;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Widget("webFeedWidget")
 @RequestMapping("/")
-public class FeedWidget extends AbstractWebWidget {
+public class FeedWidget extends AbstractBlogWidget {
     private OptionService optionService;
     private PostService postService;
 

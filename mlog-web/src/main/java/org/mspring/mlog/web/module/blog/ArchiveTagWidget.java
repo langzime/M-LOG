@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.web;
+package org.mspring.mlog.web.module.blog;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget
 @RequestMapping("/")
-public class ArchiveTagWidget extends AbstractWebWidget {
+public class ArchiveTagWidget extends AbstractBlogWidget {
     @Autowired
     private PostService postService;
     @Autowired

@@ -13,7 +13,7 @@ import org.mspring.mlog.service.AdService;
 import org.mspring.mlog.support.log.Log;
 import org.mspring.mlog.support.resolver.QueryParam;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.web.AbstractWebWidget;
+import org.mspring.mlog.web.module.blog.AbstractBlogWidget;
 import org.mspring.mlog.web.query.AdQueryCriterion;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.persistence.support.Sort;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget
 @RequestMapping("/admin/ad")
-public class AdWidget extends AbstractWebWidget {
+public class AdWidget extends AbstractBlogWidget {
     @Autowired
     private AdService adService;
 
