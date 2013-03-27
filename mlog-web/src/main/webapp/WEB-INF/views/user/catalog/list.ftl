@@ -23,15 +23,15 @@
 					<@spring.formHiddenInput path="catalogPage.sort.order" />
 					<table class="table table-bordered table-hover"  cellspacing="0" cellpadding="0">
 						<tr>
-							<th>
+							<th style="width:5%">
 								<input type="checkbox" onclick="mlog.form.checkAll(this, 'deleteIds');" />
 							</th>
-							<th>名称</th>
-							<th>排序</th>
-							<th>创建时间</th>
-							<th>操作</th>
+							<th style="width:15%">名称</th>
+							<th style="width:47%">描述</th>
+							<th style="width:22%">创建时间</th>
+							<th style="width:10%">操作</th>
 						</tr>
-						<#if catalogPage??>
+						<#if catalogPage?exists>
 							<#list catalogPage.result as item>
 								<#assign tdClass = "odd">
 								<#if item_index%2 == 0>
@@ -45,22 +45,22 @@
 								<tr>
 									<td class="${tdClass}"><input type="checkbox" name="deleteIds" value="${item.id}" /></td>
 									<td class="${tdClass}">${item.name}</td>
-									<td class="${tdClass}">${item.order!""}
-									</td>
+									<td class="${tdClass}">${item.description!""}</td>
 									<td class="${tdClass}">${item.createTime}</td>
 									<td class="${tdClass}">
-										<input type="hidden" name="ids" value="${item.id}" />
-										<a href="${base}/admin/catalog/edit?id=${item.id}">修改</a>
+										<input type="hidden" class="ids" name="ids" value="${item.id}" />
+										<input type="hidden" class="order" name="order" value="${item.order!""}" />
+										<a href="#" onclick=edit(this); >修改</a>
 									</td>
 								</tr>
 							</#list>
 						</#if>
 						<tr>
-							<td class="${tdClass}">
-							<input  type="button" class="btn btn-small btn-primary" value="删  除" data-loading-text="正在提交..." onclick="ctrl();" />
+							<td >
+							<input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" />
 							</td>
 							
-							<td class="${tdClass}" colspan="5">
+							<td  colspan="5">
 								<@mspring.pagingnavigator page=catalogPage form_id="catalogForm" />
 							</td>
 						</tr>
@@ -68,28 +68,16 @@
 				</form>
 	    	</div>
 	    	<div class="span4 row-fluid">
-	    	
 	    		<div class="widget-box">
 					<div class="widget-title">添加分类</div>
 					<div class="widget-content" >
-						<form class="form-horizontal">
-							<div class="control-group">
-								<label class="control-label text-info" style="width:60px">编号:</label>
-								<div class="controls" style="margin-left:90px">
-									<@spring.formInput path="catalog.id" attributes='class="textinput" disabled="disabled"' defaultValue="自动生成"  />
-								</div>
-							</div>
-							<div class="control-group">
+						<form class="form-horizontal" id="createForm" action="${base}/user/catalog/create" method="POST">
+						<@spring.bind "catalog" />
+							<div class="control-group" style="margin-top:10px">
 								<label class="control-label text-info" style="width:60px">名称:</label>
 								<div class="controls" style="margin-left:90px">
 									<@spring.formInput path="catalog.name" attributes='class="textinput" validate=\'{required: true, catalogNameExists:true, messages:{required:"请输入分类名称", catalogNameExists:"分类名字已经存在"}}\'' />
 								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label text-info" style="width:60px">创建时间:</label>
-								<div class="controls" style="margin-left:90px">
-							    	<@spring.formInput path="catalog.createTime" attributes='class="textinput" disabled="disabled"' defaultValue="当前时间" />
-							  	</div>
 							</div>
 							<div class="control-group">
 							  	<label class="control-label text-info" style="width:60px">排序:</label>
@@ -111,27 +99,15 @@
 					</div>
 				</div>
 				
-				
-				<div class="widget-box">
+				<div class="widget-box" style="margin-top:20px">
 					<div class="widget-title">修改分类</div>
 					<div class="widget-content">
-						<form class="form-horizontal">
-							<div class="control-group">
-							  	<label class="control-label text-info" style="width:60px">编号:</label>
-							  	<div class="controls" style="margin-left:90px">
-									<@spring.formInput path="catalog.id" attributes='class="textinput" disabled="disabled"' defaultValue="自动生成"  />
-							  	</div>
-							</div>
-							<div class="control-group">
+						<form class="form-horizontal" id="modifyForm" action="${base}/user/catalog/modify" method="POST">
+							<div class="control-group" style="margin-top:10px">
 							  	<label class="control-label text-info" style="width:60px">名称:</label>
 							  	<div class="controls" style="margin-left:90px">
-							   		<@spring.formInput path="catalog.name" attributes='class="textinput" validate=\'{required: true, catalogNameExists:true, messages:{required:"请输入分类名称", catalogNameExists:"分类名字已经存在"}}\'' />
-							  	</div>
-							</div>
-							<div class="control-group">
-							  	<label class="control-label text-info" style="width:60px">创建时间:</label>
-							  	<div class="controls" style="margin-left:90px">
-							    	<@spring.formInput path="catalog.createTime" attributes='class="textinput" disabled="disabled"' defaultValue="当前时间" />
+							   		<@spring.formHiddenInput path="catalog.id" />
+							   		<@spring.formInput path="catalog.name" attributes='class="textinput"  validate=\'{required: true, catalogNameExists:true, messages:{required:"请输入分类名称", catalogNameExists:"分类名字已经存在"}}\'' />
 							  	</div>
 							</div>
 							
@@ -158,10 +134,66 @@
 	    	
 	    	</div>
 	    </div>
-		    
-			
-			
-		   
-				
-			
 	</div>
+	
+<script type="text/javascript">
+	$(document).ready(function(){
+			mlog.form.validate({
+			selector : "#createForm",
+			errorLabelContainer : "#createError",
+			wrapper: 'span',
+			onfocusout : false,
+			onkeyup : false,
+			onclick : false,
+			success : function(){
+				mlog.utils.scrollTop();
+			}
+		});
+	});
+	
+	function edit(obj){
+	
+		var id = $($($(obj).parent().parent().children().get(4)).find('input.ids')).val();
+		var name= $($(obj).parent().parent().children().get(1)).html();
+		var description= $($(obj).parent().parent().children().get(2)).html();
+		var order = $($($(obj).parent().parent().children().get(4)).find('input.order')).val();
+		
+		//
+		$('#modifyForm').find("input[id='name']").focus();
+		
+		$('#modifyForm').find("input[id='name']").val(name);
+		$('#modifyForm').find("textarea[id='description']").val(description);
+		$('#modifyForm').find("input[id='order']").val(order);
+		$('#modifyForm').find("input[id='id']").val(id);
+		
+	}
+
+	function ctrl(){
+		var flagOrders = validateOrders();
+		if(!flagOrders){
+			return;
+		}
+		mlog.form.submitForm('catalogForm', '${base}/user/catalog/ctrl');
+	}
+	
+	function validateOrders(){
+		var orders = document.getElementsByName('orders');
+		for(var i = 0; i < orders.length; i++){
+			var value = $(orders[i]).val();
+			if($.trim(value).length > 0 && !(/^\d+$/.test(value))){
+				mlog.dialog.tip({msg:'排序号必须为数字', type:'warn'});
+				$(orders[i]).focus();
+				return false;
+			}
+			if($.trim(value).length > 0){
+				if(value < 1 || value > 1000){
+					mlog.dialog.tip({msg:'排序号的范围必须在1-1000之间', type:'warn'});
+					$(orders[i]).focus();
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+</script>
+<#include "../footer.ftl" />

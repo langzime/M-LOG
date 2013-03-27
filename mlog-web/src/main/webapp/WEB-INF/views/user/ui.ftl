@@ -7,7 +7,7 @@
 				<li <#if active="文章管理">class="active"</#if>><a href="${base}/user/post/list">文章管理<i class="icon-chevron-right"></i></a></li>
 				<li <#if active="草稿箱">class="active"</#if>><a href="${base}/user/post/drafts">草稿箱<i class="icon-chevron-right"></i></a></li>
 				<li <#if active="回收站">class="active"</#if>><a href="${base}/user/post/trash">回收站<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="分类管理">class="active"</#if>><a href="${base}/user/post-categories/list">分类管理<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="分类管理">class="active"</#if>><a href="${base}/user/catalog/list">分类管理<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/comments">博客评论<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/messages">站内消息<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/reminds">我的通知<i class="icon-chevron-right"></i></a></li>
@@ -31,12 +31,19 @@
 	<meta charset="utf-8">
 	<title>${title} - ${sitename}</title>
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="${base}/style/global.css">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="${base}/style/user.css" rel="stylesheet">
 	<script type="text/javascript" src="${base}/script/jquery.js"></script>
 	<script type="text/javascript" src="${base}/script/script_variable.js"></script>
 	<script type="text/javascript" src="${base}/script/m-log.js"></script>
 	<script type="text/javascript" src="${base}/script/custom.js"></script>
+	
+	<#-- jquery validate -->
+	<script type="text/javascript" src="${base}/script/jquery-validation/jquery.validate.js"></script>
+	<script type="text/javascript" src="${base}/script/jquery-validation/jquery.metadata.js"></script>
+	<script type="text/javascript" src="${base}/script/jquery-validation/validate.method.js"></script>
+	
 	<!--[if lt IE 9]>
     <script src="${template_url}/script/html5.js"></script>
     <![endif]-->
