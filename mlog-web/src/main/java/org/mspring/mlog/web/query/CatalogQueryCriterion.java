@@ -37,12 +37,18 @@ public class CatalogQueryCriterion extends AbstractQueryCriterion {
         else {
             builder.buildEqual("catalog.parent.id", "parent.id", Long.class);
         }
+        
+        Object user =  queryParams.get("user.id");
+        if(user!=null){
+        	builder.buildEqual("catalog.user.id", "user.id", Long.class);
+        }
+        
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();
         queryParamsString = builder.getQueryParamsAsString();
 
-        queryString = "select catalog from Catalog catalog ";
+        queryString = "select catalog from Catalog catalog  ";
         countString = "select count(*) from Catalog catalog ";
     }
 
