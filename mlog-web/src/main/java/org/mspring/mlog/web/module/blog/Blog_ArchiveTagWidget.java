@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget
 @RequestMapping("/")
-public class ArchiveTagWidget extends AbstractBlogWidget {
+public class Blog_ArchiveTagWidget extends AbstractBlogWidget {
     @Autowired
     private PostService postService;
     @Autowired

@@ -31,6 +31,7 @@ public class PostQueryCriterion extends AbstractQueryCriterion {
         builder.buildLike("post.title", "title");
         builder.buildLike("post.author.alias", "author.alias");
         builder.buildEqual("post.author.id", "author.id", Long.class);
+        builder.buildEqual("post.author.name", "author.name");
         whereString = builder.endBuild();
 
         namedQueryParams = builder.getNamedQueryParams();

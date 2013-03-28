@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.blog;
+package org.mspring.mlog.web.module.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +23,7 @@ import org.springframework.web.servlet.support.WebContentGenerator;
  */
 @Widget
 @RequestMapping("/")
-public class MetaWeblogController {
+public class MetaWeblogWidget {
 
     @RequestMapping({ "/metaweblog.do", "/metaweblog" })
     public void metaweblog(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {

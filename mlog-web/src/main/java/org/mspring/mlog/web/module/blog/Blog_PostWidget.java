@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.mspring.mlog.common.PageNames;
-import org.mspring.mlog.core.ServiceFactory;
 import org.mspring.mlog.entity.Post;
 import org.mspring.mlog.service.PostService;
 import org.mspring.mlog.service.cache.CacheService;
@@ -20,6 +19,7 @@ import org.mspring.platform.utils.StringUtils;
 import org.mspring.platform.utils.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,14 +31,14 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget("webPostWidget")
 @RequestMapping({ "/", "" })
-public class PostWidget extends AbstractBlogWidget {
+public class Blog_PostWidget extends AbstractBlogWidget {
     @Autowired
     private PostService postService;
+    @Autowired
+    private CacheService cacheService;
 
-    @RequestMapping("/post")
-    public String post(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
-        CacheService cacheService = ServiceFactory.getCacheService();
-        String id = request.getParameter("id");
+    @RequestMapping("/{user}/post/{id}")
+    public String post(@PathVariable String user, @PathVariable String id, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
         Post post = null;
         Object obj = cacheService.getCacheValue(CacheService.CacheName.POST_PAGE_CACHE_NAME, id);
         if (obj != null && obj instanceof Post) {
@@ -67,14 +67,14 @@ public class PostWidget extends AbstractBlogWidget {
         }
         // 去掉空格和制表符
         description = description.replaceAll("\n|\t", "");
-
+        
         model.addAttribute("keyword", keyword);
         model.addAttribute("description", description);
         return "skin:/post";
     }
 
-    @RequestMapping("/post/token")
-    public String token(@RequestParam(required = true) Long postId, @RequestParam(required = true) String postUrl, @RequestParam(required = false) String password, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
+    @RequestMapping("/{user}/post/token")
+    public String token(@PathVariable String user, @RequestParam(required = true) Long postId, @RequestParam(required = true) String postUrl, @RequestParam(required = false) String password, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
         boolean has_permission = PermissionUtils.hasPostPermission(postId, password);
         if (!has_permission) {
             model.addAttribute("postId", postId);

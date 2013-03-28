@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget("webAlbumWidget")
 @RequestMapping("/album")
-public class AlbumWidget extends AbstractBlogWidget {
+public class Blog_AlbumWidget extends AbstractBlogWidget {
     @Autowired
     private OptionService optionService;
     @Autowired

@@ -24,10 +24,10 @@ public class FreemarkerVariableNames {
     public static final String PHOTO_PAGE = "photoPage";
     public static final String ALBUM = "album";
     public static final String PHOTO = "photo";
-    
+
     public static final String LINK_TYPES = "linkTypes";
     public static final String LINK_TYPE = "linkType";
-    
+
     public static final String LINKS = "links";
     public static final String LINK = "link";
 
@@ -35,4 +35,9 @@ public class FreemarkerVariableNames {
      * 当前页
      */
     public static final String CURRENT_PAGE = "currentPage";
+
+    /**
+     * 博客拥有者
+     */
+    public static final String BLOG_OWNER = "blogOwner";
 }

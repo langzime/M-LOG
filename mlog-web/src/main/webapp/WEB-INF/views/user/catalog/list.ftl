@@ -152,7 +152,6 @@
 	});
 	
 	function edit(obj){
-	
 		var id = $($($(obj).parent().parent().children().get(4)).find('input.ids')).val();
 		var name= $($(obj).parent().parent().children().get(1)).html();
 		var description= $($(obj).parent().parent().children().get(2)).html();

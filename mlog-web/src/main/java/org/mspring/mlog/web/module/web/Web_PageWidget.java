@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.blog;
+package org.mspring.mlog.web.module.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +14,7 @@ import org.mspring.mlog.service.PageService;
 import org.mspring.mlog.web.freemarker.render.FreemarkerRender;
 import org.mspring.mlog.web.freemarker.render.FreemarkerRenderUtils;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
+import org.mspring.mlog.web.module.blog.AbstractBlogWidget;
 import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ import freemarker.template.SimpleHash;
  * @TODO
  */
 @Widget("webPageWidget")
-public class PageWidget extends AbstractBlogWidget {
+public class Web_PageWidget extends AbstractBlogWidget {
     @Autowired
     private PageService pageService;
 

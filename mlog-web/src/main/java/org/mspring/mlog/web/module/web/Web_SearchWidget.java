@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.mspring.mlog.web.module.blog;
+package org.mspring.mlog.web.module.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +13,7 @@ import org.mspring.mlog.entity.Post;
 import org.mspring.mlog.service.search.HibernateSearchService;
 import org.mspring.mlog.web.freemarker.FreemarkerVariableNames;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
+import org.mspring.mlog.web.module.blog.AbstractBlogWidget;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.utils.StringUtils;
 import org.mspring.platform.utils.ValidatorUtils;
@@ -30,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget("webSearchWidget")
 @RequestMapping("/search")
-public class SearchWidget extends AbstractBlogWidget {
-    private static final Logger log = Logger.getLogger(SearchWidget.class);
+public class Web_SearchWidget extends AbstractBlogWidget {
+    private static final Logger log = Logger.getLogger(Web_SearchWidget.class);
 
     @Autowired
     private HibernateSearchService hibernateSearchService;

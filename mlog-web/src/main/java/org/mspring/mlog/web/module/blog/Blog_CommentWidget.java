@@ -33,9 +33,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @description
  * @TODO
  */
-@Widget("webCommentWidget")
+@Widget
 @RequestMapping("/comment")
-public class CommentWidget extends AbstractBlogWidget {
+public class Blog_CommentWidget extends AbstractBlogWidget {
     @Autowired
     private CommentService commentService;
     @Autowired

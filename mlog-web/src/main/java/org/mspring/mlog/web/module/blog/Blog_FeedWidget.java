@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Widget("webFeedWidget")
 @RequestMapping("/")
-public class FeedWidget extends AbstractBlogWidget {
+public class Blog_FeedWidget extends AbstractBlogWidget {
     private OptionService optionService;
     private PostService postService;
 
