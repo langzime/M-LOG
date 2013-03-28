@@ -15,14 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Gao Youbo
  * @since 2012-12-31
- * @Description 
- * @TODO 
+ * @Description
+ * @TODO
  */
 @Service
 @Transactional
 public class HQLExecuteServiceImpl extends AbstractServiceSupport implements HQLExecuteService {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.mspring.mlog.service.HQLExecuteService#query(java.lang.String)
      */
     @Override
@@ -31,8 +33,11 @@ public class HQLExecuteServiceImpl extends AbstractServiceSupport implements HQL
         return getHibernateTemplate().find(hql);
     }
 
-    /* (non-Javadoc)
-     * @see org.mspring.mlog.service.HQLExecuteService#query(java.lang.String, Integer, Integer)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.mspring.mlog.service.HQLExecuteService#query(java.lang.String,
+     * Integer, Integer)
      */
     @Override
     public List query(String hql, Integer firstResult, Integer maxResults) {

@@ -48,9 +48,10 @@ public interface AlbumService {
      * @return
      */
     public boolean hasPermission(Long albumId, String password);
-    
+
     /**
      * 设置相册封面
+     * 
      * @param albumId
      * @param photoId
      */

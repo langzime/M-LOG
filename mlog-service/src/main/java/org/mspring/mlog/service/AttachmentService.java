@@ -16,6 +16,6 @@ public interface AttachmentService {
     Attachment getAttachmentById(Long id);
 
     Attachment createAttachment(MultipartFile mf);
-    
+
     Attachment createAttachment(String base64Data, String ext, Long user);
 }

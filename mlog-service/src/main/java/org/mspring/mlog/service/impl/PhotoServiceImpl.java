@@ -64,8 +64,7 @@ public class PhotoServiceImpl extends AbstractServiceSupport implements PhotoSer
         String url = "";
         try {
             url = photoUploadService.uploadPhoto(image, photoSavePath);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
@@ -77,8 +76,7 @@ public class PhotoServiceImpl extends AbstractServiceSupport implements PhotoSer
         String previewUrl = "";
         try {
             previewUrl = photoUploadService.uploadPhoto(previewImage, photoPreviewSavenPath);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
         }
@@ -116,8 +114,7 @@ public class PhotoServiceImpl extends AbstractServiceSupport implements PhotoSer
             try {
                 fileService.deleteFile(photo.getFileName());
                 fileService.deleteFile(photo.getPreviewFileName());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // TODO: handle exception
                 log.warn("remove file from bcs error, filename = " + photo.getFileName(), e);
                 continue;

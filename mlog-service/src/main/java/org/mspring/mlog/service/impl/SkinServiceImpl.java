@@ -116,8 +116,7 @@ public class SkinServiceImpl extends AbstractServiceSupport implements SkinServi
                     return true;
                 }
             });
-            
-            
+
             for (File skinfile : skinfiles) {
                 String skin_properties_filename = skinfile.getPath() + File.separator + Keys.SKIN_PROPERTIES_NAME;
                 File skin_properties_file = new File(skin_properties_filename);
@@ -133,8 +132,7 @@ public class SkinServiceImpl extends AbstractServiceSupport implements SkinServi
             }
             return list;
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

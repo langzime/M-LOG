@@ -145,25 +145,23 @@ public class JobServiceImpl extends AbstractServiceSupport implements JobService
         Class clazz = null;
         try {
             clazz = ClassUtils.getClass(className);
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             log.error(String.format("can't register job server, class not found. [id=%s, className=%s]", job.getId(), className));
             throw new BusinessException(String.format("can't register job server, class not found. [id=%s, className=%s]", job.getId(), className));
         }
 
         String execType = job.getExecType();
-        if (StringUtils.isBlank(execType)) execType = Job.ExecType.SIMPLE;
+        if (StringUtils.isBlank(execType))
+            execType = Job.ExecType.SIMPLE;
         try {
             if (execType.equalsIgnoreCase(Job.ExecType.CRON)) {
                 schedulerService.schedule(job.getId().toString(), clazz, job.getExpression());
-            }
-            else {
+            } else {
                 Long repeatInterval = new Long(job.getExpression());
                 schedulerService.schedule(job.getId().toString(), clazz, repeatInterval);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO: handle exception
             log.error(String.format("can't register job server. [id=%s, className=%s, execType=%s, expression=%s]", job.getId(), className, execType, job.getExpression()));
             throw new BusinessException(String.format("can't register job server. [id=%s, className=%s, execType=%s, expression=%s]", job.getId(), className, execType, job.getExpression()));
@@ -184,8 +182,7 @@ public class JobServiceImpl extends AbstractServiceSupport implements JobService
             try {
                 reloadJobServer(job);
                 log.info(String.format("Job Server load success. name = [id=%s, className=%s, execType=%s, expression=%s]", job.getId(), job.getClass(), job.getExecType(), job.getExpression()));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // TODO: handle exception
                 log.error(e.getMessage());
                 continue;

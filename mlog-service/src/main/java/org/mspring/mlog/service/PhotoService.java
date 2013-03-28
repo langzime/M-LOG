@@ -21,7 +21,7 @@ public interface PhotoService {
     public Photo getPhotoById(Long photoId);
 
     public void deletePhoto(Long... id);
-    
+
     public void updatePhoto(Photo photo);
 
     public Page<Photo> findPhoto(Page<Photo> page, QueryCriterion queryCriterion);

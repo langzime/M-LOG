@@ -167,11 +167,9 @@ public class AlbumServiceImpl extends AbstractServiceSupport implements AlbumSer
         Album album = getAlbumById(albumId);
         if (Album.Type.PUBLIC.equals(album.getType())) {
             return true;
-        }
-        else if (Album.Type.PRIVATE.equals(album.getType())) {
+        } else if (Album.Type.PRIVATE.equals(album.getType())) {
             return false;
-        }
-        else if (password.equals(album.getVerifycode())) {
+        } else if (password.equals(album.getVerifycode())) {
             return true;
         }
         return false;
