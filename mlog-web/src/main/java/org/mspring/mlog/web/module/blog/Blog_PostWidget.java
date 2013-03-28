@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @description
  * @TODO
  */
-@Widget("webPostWidget")
+@Widget
 @RequestMapping({ "/", "" })
 public class Blog_PostWidget extends AbstractBlogWidget {
     @Autowired

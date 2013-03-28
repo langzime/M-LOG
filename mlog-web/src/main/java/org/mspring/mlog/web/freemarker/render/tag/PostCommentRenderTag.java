@@ -7,10 +7,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.mspring.mlog.common.Keys;
 import org.mspring.mlog.core.ServiceFactory;
 import org.mspring.mlog.entity.Comment;
-import org.mspring.platform.utils.CookieUtils;
+import org.mspring.mlog.entity.security.User;
+import org.mspring.mlog.web.security.SecurityUtils;
 
 import freemarker.template.SimpleHash;
 
@@ -39,14 +39,14 @@ public class PostCommentRenderTag extends CacheRenderTag {
         if (post == null) {
             return "";
         }
-        List<Comment> comments = ServiceFactory.getCommentService().findCommentsByPost(post);
         HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+        User user = SecurityUtils.getCurrentUser(request);
+        
+        List<Comment> comments = ServiceFactory.getCommentService().findCommentsByPost(post);
         
         model.put("comments", comments);
         model.put("postId", post);
-        model.put("author", CookieUtils.getCookie(request, Keys.COMMENT_AUTHOR_COOKIE));
-        model.put("email", CookieUtils.getCookie(request, Keys.COMMENT_EMAIL_COOKIE));
-        model.put("url", CookieUtils.getCookie(request, Keys.COMMENT_URL_COOKIE));
+        model.put("currentUser", user);
         return getTemplateString(model);
     }
 

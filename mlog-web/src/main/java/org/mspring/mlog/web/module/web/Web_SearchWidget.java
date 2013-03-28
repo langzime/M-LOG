@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.search.Query;
-import org.mspring.mlog.common.PageNames;
 import org.mspring.mlog.entity.Post;
 import org.mspring.mlog.service.search.HibernateSearchService;
 import org.mspring.mlog.web.freemarker.FreemarkerVariableNames;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.blog.AbstractBlogWidget;
+import org.mspring.mlog.web.module.AbstractWidget;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.utils.StringUtils;
 import org.mspring.platform.utils.ValidatorUtils;
@@ -31,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Widget("webSearchWidget")
 @RequestMapping("/search")
-public class Web_SearchWidget extends AbstractBlogWidget {
+public class Web_SearchWidget extends AbstractWidget {
     private static final Logger log = Logger.getLogger(Web_SearchWidget.class);
 
     @Autowired
@@ -47,8 +46,7 @@ public class Web_SearchWidget extends AbstractBlogWidget {
         String pageStr = request.getParameter("page");
         if (StringUtils.isBlank(pageStr) || !ValidatorUtils.isNumber(pageStr)) {
             postPage.setPageNo(1);
-        }
-        else {
+        } else {
             postPage.setPageNo(Integer.parseInt(pageStr.trim()));
         }
         if (StringUtils.isNotBlank(keyword)) {
@@ -57,15 +55,13 @@ public class Web_SearchWidget extends AbstractBlogWidget {
                 String[] fields = new String[] { "title", "summary", "content" };
                 Query query = hibernateSearchService.getQueryBuilder(Post.class).keyword().onFields(fields).matching(keyword).createQuery();
                 postPage = hibernateSearchService.searchPage(postPage, query, Post.class);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // TODO: handle exception
                 log.debug(String.format("search for keyword [%keyword] failure!", keyword));
             }
         }
         model.addAttribute(FreemarkerVariableNames.SEARCH_KEYWORD, keyword);
         model.addAttribute(FreemarkerVariableNames.POST_PAGE, postPage);
-        setCurrnetPage(model, PageNames.SEARCH);
         return "skin:/search";
     }
 }

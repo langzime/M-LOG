@@ -14,7 +14,7 @@ import org.mspring.mlog.service.PageService;
 import org.mspring.mlog.web.freemarker.render.FreemarkerRender;
 import org.mspring.mlog.web.freemarker.render.FreemarkerRenderUtils;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.mlog.web.module.blog.AbstractBlogWidget;
+import org.mspring.mlog.web.module.AbstractWidget;
 import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -29,8 +29,8 @@ import freemarker.template.SimpleHash;
  * @description
  * @TODO
  */
-@Widget("webPageWidget")
-public class Web_PageWidget extends AbstractBlogWidget {
+@Widget
+public class Web_PageWidget extends AbstractWidget {
     @Autowired
     private PageService pageService;
 

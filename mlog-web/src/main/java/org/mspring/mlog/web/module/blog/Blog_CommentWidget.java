@@ -9,15 +9,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mspring.mlog.common.Keys;
 import org.mspring.mlog.entity.Comment;
 import org.mspring.mlog.entity.Post;
+import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.CommentService;
 import org.mspring.mlog.service.OptionService;
 import org.mspring.mlog.service.PostService;
 import org.mspring.mlog.utils.PostUrlUtils;
 import org.mspring.mlog.web.freemarker.widget.stereotype.Widget;
-import org.mspring.platform.utils.CookieUtils;
+import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.utils.RequestUtils;
 import org.mspring.platform.utils.StringUtils;
 import org.mspring.platform.utils.ValidatorUtils;
@@ -67,11 +67,12 @@ public class Blog_CommentWidget extends AbstractBlogWidget {
         if (!Post.CommentStatus.OPEN.equals(postService.getPostById(new Long(postId)).getCommentStatus())) {
             return prompt(model, "文章评论已关闭，无法发表评论");
         }
+        User currentUser = SecurityUtils.getCurrentUser(request);
+        if (currentUser == null) {
+            return prompt(model, "请先登录");
+        }
 
-        String author = request.getParameter("author");
         String content = request.getParameter("content");
-        String email = request.getParameter("email");
-        String url = request.getParameter("url");
         String ip = RequestUtils.getRemoteIP(request);
         String agent = RequestUtils.getUserAgent(request);
 
@@ -79,13 +80,6 @@ public class Blog_CommentWidget extends AbstractBlogWidget {
         Long reply_comment = null;
         if (StringUtils.isNotBlank(reply_comment_str) && ValidatorUtils.isNumber(reply_comment_str.trim())) {
             reply_comment = new Long(request.getParameter("reply_comment").trim());
-        }
-
-        /**
-         * 验证评论发布人
-         */
-        if (StringUtils.isBlank(author)) {
-            return prompt(model, "评论发表失败，发布人不能为空");
         }
 
         /**
@@ -102,26 +96,9 @@ public class Blog_CommentWidget extends AbstractBlogWidget {
             return prompt(model, "评论发表失败，评论内容不能超过4000字符");
         }
 
-        /**
-         * 验证email地址， email地址为非必填项，如果填写，那么验证email格式是否正确
-         */
-        if (StringUtils.isNotBlank(email) && !ValidatorUtils.isEmailAddress(email)) {
-            return prompt(model, "评论发表失败，email格式填写不正确");
-        }
-
-        /**
-         * 验证URL， URL地址为非必填项，如果填写，那么验证URL格式是否正确
-         * 
-         */
-        if (StringUtils.isNotBlank(url) && !ValidatorUtils.isUrl(url)) {
-            return prompt(model, "评论发表失败，主页地址格式填写不正确");
-        }
-
         Comment comment = new Comment();
-        comment.setAuthor(author);
+        comment.setAuthor(currentUser);
         comment.setContent(content);
-        comment.setEmail(email);
-        comment.setUrl(url);
         comment.setPostIp(ip);
         comment.setAgent(agent);
         comment.setCreateTime(new Date());
@@ -138,14 +115,6 @@ public class Blog_CommentWidget extends AbstractBlogWidget {
             comment.setStatus(Comment.Status.APPROVED);
         }
         comment = commentService.createComment(comment);
-
-        // 更新文章评论数量
-        // postService.updatePostCommentCount(new Long(postId.trim()));
-
-        // 将评论作者的信息保存到cookie中
-        CookieUtils.setCookie(response, Keys.COMMENT_AUTHOR_COOKIE, author, 365);
-        CookieUtils.setCookie(response, Keys.COMMENT_EMAIL_COOKIE, email, 365);
-        CookieUtils.setCookie(response, Keys.COMMENT_URL_COOKIE, url, 365);
         String postUrl = PostUrlUtils.getPostUrl(comment.getPost());
         return String.format("redirect:%s", postUrl + "#comment-" + comment.getId());
     }

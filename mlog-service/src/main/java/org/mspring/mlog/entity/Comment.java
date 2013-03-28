@@ -26,6 +26,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.mspring.mlog.core.ServiceFactory;
+import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.cache.CacheService;
 
 import com.google.gson.annotations.Expose;
@@ -48,12 +49,6 @@ public class Comment implements Serializable {
     @Expose
     private Long id;
     @Expose
-    private String author;
-    @Expose
-    private String email;
-    @Expose
-    private String url;
-    @Expose
     private String content;
     @Expose
     private Date createTime;
@@ -65,28 +60,10 @@ public class Comment implements Serializable {
     private Post post;
     @Expose
     private String status;
-    
-    private Comment parent;
 
-    // // 指定该评论回复的是哪条评论
-    // @Expose
-    // private Long replyComment;
-    //
-    // // 回复评论的内容(引用内容)
-    // @Expose
-    // private String replyCommentContent;
-    //
-    // // 被评论用户
-    // @Expose
-    // private String replyUser;
-    //
-    // // 被评论用户Email
-    // @Expose
-    // private String replyUserEmail;
-    //
-    // // 被评论用户的主页
-    // @Expose
-    // private String replyUserUrl;
+    private Comment parent;
+    @Expose
+    private User author;
 
     /**
      * 
@@ -119,54 +96,6 @@ public class Comment implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return the author
-     */
-    @Column(name = "author", nullable = false, length = 100)
-    public String getAuthor() {
-        return author;
-    }
-
-    /**
-     * @param author
-     *            the author to set
-     */
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    /**
-     * @return the email
-     */
-    @Column(name = "email", length = 100)
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email
-     *            the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the url
-     */
-    @Column(name = "url", length = 200)
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * @param url
-     *            the url to set
-     */
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     /**
@@ -268,86 +197,6 @@ public class Comment implements Serializable {
         this.status = status;
     }
 
-    // /**
-    // * @return the replyComment
-    // */
-    // @Column(name = "reply_comment", length = 30)
-    // public Long getReplyComment() {
-    // return replyComment;
-    // }
-    //
-    // /**
-    // * @param replyComment
-    // * the replyComment to set
-    // */
-    // public void setReplyComment(Long replyComment) {
-    // this.replyComment = replyComment;
-    // }
-    //
-    // /**
-    // * @return the replyCommentContent
-    // */
-    // @Column(name = "reply_comment_content", length = 5000)
-    // public String getReplyCommentContent() {
-    // return replyCommentContent;
-    // }
-    //
-    // /**
-    // * @param replyCommentContent
-    // * the replyCommentContent to set
-    // */
-    // public void setReplyCommentContent(String replyCommentContent) {
-    // this.replyCommentContent = replyCommentContent;
-    // }
-    //
-    // /**
-    // * @return the replyUser
-    // */
-    // @Column(name = "reply_user", length = 30)
-    // public String getReplyUser() {
-    // return replyUser;
-    // }
-    //
-    // /**
-    // * @param replyUser
-    // * the replyUser to set
-    // */
-    // public void setReplyUser(String replyUser) {
-    // this.replyUser = replyUser;
-    // }
-    //
-    // /**
-    // * @return the replyUserEmail
-    // */
-    // @Column(name = "reply_user_email", length = 100)
-    // public String getReplyUserEmail() {
-    // return replyUserEmail;
-    // }
-    //
-    // /**
-    // * @param replyUserEmail
-    // * the replyUserEmail to set
-    // */
-    // public void setReplyUserEmail(String replyUserEmail) {
-    // this.replyUserEmail = replyUserEmail;
-    // }
-    //
-    // /**
-    // * @return the replyUserUrl
-    // */
-    // @Column(name = "reply_user_url", length = 200)
-    // public String getReplyUserUrl() {
-    // return replyUserUrl;
-    // }
-    //
-    // /**
-    // * @param replyUserUrl
-    // * the replyUserUrl to set
-    // */
-    // public void setReplyUserUrl(String replyUserUrl) {
-    // this.replyUserUrl = replyUserUrl;
-    // }
-
     @ManyToOne(fetch = FetchType.LAZY, optional = true, targetEntity = Comment.class)
     @JoinColumn(name = "parent")
     public Comment getParent() {
@@ -356,6 +205,23 @@ public class Comment implements Serializable {
 
     public void setParent(Comment parent) {
         this.parent = parent;
+    }
+
+    /**
+     * @return the author
+     */
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, targetEntity = User.class)
+    @JoinColumn(name = "author", nullable = false)
+    public User getAuthor() {
+        return author;
+    }
+
+    /**
+     * @param author
+     *            the author to set
+     */
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     /**
@@ -369,6 +235,16 @@ public class Comment implements Serializable {
             Comment parent = ServiceFactory.getCommentService().getCommentById(this.getParent().getId());
             this.setParent(parent);
             return parent;
+        }
+        return null;
+    }
+
+    @Transient
+    public User getAuthorEager() {
+        if (this.author != null && this.author.getId() != null && this.author.getId() != new Long(0)) {
+            User author = ServiceFactory.getUserService().getUserById(this.author.getId());
+            this.setAuthor(author);
+            return author;
         }
         return null;
     }

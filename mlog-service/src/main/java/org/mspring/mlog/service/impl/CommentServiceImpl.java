@@ -220,24 +220,24 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
     @Override
     public void commentReplyNotice(Comment comment) {
         // TODO Auto-generated method stub
-        comment.getParentEager();
-        if (comment != null && comment.getParent() != null && StringUtils.isNotBlank(comment.getParent().getEmail())) {
-            comment.getPostEager();
-
-            String siteurl = optionService.getOption("siteurl");
-            String commentUrl = siteurl + PostUrlUtils.getPostUrl(comment.getPost());
-
-            Map<Object, Object> model = new HashMap<Object, Object>();
-            model.put("commentUrl", commentUrl);
-            model.put("comment", comment);
-            model.put("post", comment.getPost());
-
-            String content = FreemarkerUtils.render(configuration, "mail/comment_reply_notice.ftl", model);
-            String to = comment.getParent().getEmail();
-            String personal = comment.getParent().getAuthor();
-            String subject = optionService.getOption("sitename") + " - 评论回复通知";
-            mailService.sendMail(to, personal, subject, content);
-        }
+//        comment.getParentEager();
+//        if (comment != null && comment.getParent() != null && StringUtils.isNotBlank(comment.getParent().getEmail())) {
+//            comment.getPostEager();
+//
+//            String siteurl = optionService.getOption("siteurl");
+//            String commentUrl = siteurl + PostUrlUtils.getPostUrl(comment.getPost());
+//
+//            Map<Object, Object> model = new HashMap<Object, Object>();
+//            model.put("commentUrl", commentUrl);
+//            model.put("comment", comment);
+//            model.put("post", comment.getPost());
+//
+//            String content = FreemarkerUtils.render(configuration, "mail/comment_reply_notice.ftl", model);
+//            String to = comment.getParent().getEmail();
+//            String personal = comment.getParent().getAuthor();
+//            String subject = optionService.getOption("sitename") + " - 评论回复通知";
+//            mailService.sendMail(to, personal, subject, content);
+//        }
     }
 
     /*
