@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author Gao Youbo
  * @since 2013-3-1
- * @description
+ * @description 文章评论
  * @TODO
  */
 @Widget

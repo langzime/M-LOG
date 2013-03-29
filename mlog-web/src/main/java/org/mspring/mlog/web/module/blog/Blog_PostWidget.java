@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author Gao Youbo
  * @since 2013-3-1
- * @description
+ * @description 文章页
  * @TODO
  */
 @Widget
@@ -67,7 +67,7 @@ public class Blog_PostWidget extends AbstractBlogWidget {
         }
         // 去掉空格和制表符
         description = description.replaceAll("\n|\t", "");
-        
+
         model.addAttribute("keyword", keyword);
         model.addAttribute("description", description);
         return "skin:/post";

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author Gao Youbo
  * @since 2012-8-3
- * @Description
+ * @Description RSS、Atom订阅
  * @TODO
  */
 @Widget

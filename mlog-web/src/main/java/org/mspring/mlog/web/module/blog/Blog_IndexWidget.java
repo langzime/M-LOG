@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author Gao Youbo
  * @since 2012-7-23
- * @Description
+ * @Description 首页
  * @TODO
  */
 @Widget
