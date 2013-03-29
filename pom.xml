@@ -228,10 +228,10 @@
 			<version>1.7.2</version>
 		</dependency>
 	</dependencies>
+	<!-- 
 	<build>
 		<finalName>M-LOG</finalName>
 		<plugins>
-			<!-- package jar on package -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -245,7 +245,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- install jar to local repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -267,7 +266,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- deploy jar to remote repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
@@ -298,9 +296,9 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
+	-->
 	<modules>
 		<module>mspring-platform</module>
 		<module>mlog-service</module>
