@@ -36,6 +36,18 @@ public class UserMessagePK implements Serializable {
         // TODO Auto-generated constructor stub
     }
 
+    public UserMessagePK(User user, Message message) {
+        super();
+        this.user = user;
+        this.message = message;
+    }
+
+    public UserMessagePK(Long userId, Long messageId) {
+        super();
+        this.user = new User(userId);
+        this.message = new Message(messageId);
+    }
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = User.class)
     @JoinColumn(name = "user_id")
     public User getUser() {

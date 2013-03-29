@@ -14,11 +14,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.mspring.mlog.entity.Comment;
+import org.mspring.mlog.entity.Post;
 import org.mspring.mlog.service.CommentService;
 import org.mspring.mlog.service.MailService;
+import org.mspring.mlog.service.MessageService;
 import org.mspring.mlog.service.OptionService;
 import org.mspring.mlog.service.PostService;
-import org.mspring.mlog.utils.PostUrlUtils;
 import org.mspring.platform.core.AbstractServiceSupport;
 import org.mspring.platform.persistence.query.QueryCriterion;
 import org.mspring.platform.persistence.support.Page;
@@ -39,6 +40,7 @@ import freemarker.template.Configuration;
  */
 @Service
 @Transactional
+@SuppressWarnings({ "unchecked", "unused" })
 public class CommentServiceImpl extends AbstractServiceSupport implements CommentService {
 
     private static final Logger log = Logger.getLogger(CommentServiceImpl.class);
@@ -51,6 +53,8 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
     private Configuration configuration;
     @Autowired
     private OptionService optionService;
+    @Autowired
+    private MessageService messageService;
 
     /*
      * (non-Javadoc)
@@ -85,6 +89,7 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
      * org.mspring.mlog.service.CommentService#findCommentsByPost(java.lang.
      * Long)
      */
+
     @Override
     public List<Comment> findCommentsByPost(Long postId) {
         // TODO Auto-generated method stub
@@ -218,27 +223,7 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
     @Override
     public void commentReplyNotice(Comment comment) {
         // TODO Auto-generated method stub
-        // comment.getParentEager();
-        // if (comment != null && comment.getParent() != null &&
-        // StringUtils.isNotBlank(comment.getParent().getEmail())) {
-        // comment.getPostEager();
-        //
-        // String siteurl = optionService.getOption("siteurl");
-        // String commentUrl = siteurl +
-        // PostUrlUtils.getPostUrl(comment.getPost());
-        //
-        // Map<Object, Object> model = new HashMap<Object, Object>();
-        // model.put("commentUrl", commentUrl);
-        // model.put("comment", comment);
-        // model.put("post", comment.getPost());
-        //
-        // String content = FreemarkerUtils.render(configuration,
-        // "mail/comment_reply_notice.ftl", model);
-        // String to = comment.getParent().getEmail();
-        // String personal = comment.getParent().getAuthor();
-        // String subject = optionService.getOption("sitename") + " - 评论回复通知";
-        // mailService.sendMail(to, personal, subject, content);
-        // }
+
     }
 
     /*
@@ -251,22 +236,19 @@ public class CommentServiceImpl extends AbstractServiceSupport implements Commen
     @Override
     public void commentNotice(Comment comment) {
         // TODO Auto-generated method stub
-        Map<Object, Object> model = new HashMap<Object, Object>();
-        if (comment != null) {
-            comment.getPostEager();
-
-            String siteurl = optionService.getOption("siteurl");
-            String commentUrl = siteurl + PostUrlUtils.getPostUrl(comment.getPost());
-
-            model.put("commentUrl", commentUrl);
-            model.put("comment", comment);
-            model.put("post", comment.getPost());
-
-            String content = FreemarkerUtils.render(configuration, "mail/new_comment_notice.ftl", model);
-            String to = comment.getPost().getAuthor().getEmail();
-            String personal = comment.getPost().getAuthor().getAlias();
-            String subject = optionService.getOption("sitename") + " - 文章评论通知";
-            mailService.sendMail(to, personal, subject, content);
+        if (comment == null) {
+            return;
         }
+        if (comment.getPost() == null || comment.getPost().getId() == null) {
+            return;
+        }
+        Post post = comment.getPostEager();
+        Long user = post.getAuthor().getId();
+
+        Map<Object, Object> model = new HashMap<Object, Object>();
+        model.put("postTitle", post.getTitle());
+        String content = FreemarkerUtils.render(configuration, "message/comment_notice.ftl", model);
+
+        messageService.sendSystemMessage(content, user);
     }
 }

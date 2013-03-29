@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.mspring.mlog.entity.security.User;
 
 /**
@@ -23,13 +25,27 @@ import org.mspring.mlog.entity.security.User;
  */
 @Entity
 @Table(name = "message")
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 8575465007021582622L;
     private Long id;
     private User author;
-    private String message;
+    private String content;
     private Date createTime;
+    private Boolean isSystem;
+
+    /**
+     * 
+     */
+    public Message() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public Message(Long id) {
+        super();
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,12 +66,12 @@ public class Message implements Serializable {
         this.author = author;
     }
 
-    public String getMessage() {
-        return message;
+    public String getContent() {
+        return content;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Date getCreateTime() {
@@ -64,6 +80,14 @@ public class Message implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Boolean getIsSystem() {
+        return isSystem;
+    }
+
+    public void setIsSystem(Boolean isSystem) {
+        this.isSystem = isSystem;
     }
 
 }

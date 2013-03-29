@@ -100,17 +100,18 @@ public interface CommentService {
     public void recycle(Long... ids);
 
     /**
-     * 评论回复邮件通知
+     * 评论回复通知
      * 
      * @param comment
-     *            当前评论编号
+     *            当前评论
      */
     public void commentReplyNotice(Comment comment);
 
     /**
-     * 新评论邮件通知文章作者
+     * 评论通知
      * 
      * @param comment
+     *            当前评论
      */
     public void commentNotice(Comment comment);
 }
