@@ -1,8 +1,6 @@
 M-LOG
 =====
 
-
-
 M-LOG交流群：100231009
 
 M-LOG是一个遵循Apache License Version 2.0协议的开源软件。 M-LOG是一个用Java搭建的博客程序。该程序使用JDK1.5+、Spring MVC、Hibernate、Freemarker、Lucene搭建。
