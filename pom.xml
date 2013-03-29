@@ -227,6 +227,11 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.7.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<version>3.0.M1</version>
+		</dependency>
 	</dependencies>
 	<!-- 
 	<build>

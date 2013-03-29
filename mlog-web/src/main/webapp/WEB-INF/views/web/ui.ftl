@@ -10,13 +10,11 @@
 	<script type="text/javascript" src="${base}/script/jquery.js"></script>
 	<script type="text/javascript" src="${base}/script/script_variable.js"></script>
 	<script type="text/javascript" src="${base}/script/m-log.js"></script>
-	<script type="text/javascript" src="${base}/script/custom.js"></script>
 	
 	<#-- jquery validate -->
 	<script type="text/javascript" src="${base}/script/jquery-validation/jquery.validate.js"></script>
 	<script type="text/javascript" src="${base}/script/jquery-validation/jquery.metadata.js"></script>
 	<script type="text/javascript" src="${base}/script/jquery-validation/validate.method.js"></script>
-	
 	<!--[if lt IE 9]>
     <script src="${template_url}/script/html5.js"></script>
     <![endif]-->
@@ -33,7 +31,7 @@
 	    <style type="text/css">
 		body { padding-top: 60px;}
 		</style>
-	    <div class="navbar navbar-fixed-top <#-- navbar-inverse -->">
+	    <div class="navbar navbar-fixed-top navbar-inverse">
 	  		<div class="navbar-inner">
 	    		<div class="container-fluid">
 	          		<a class="brand" href="${siteurl}" target="_blank">${sitename}</a>
