@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @author Gao Youbo
+ * @author Gao YOUBO
  * @since 2013-3-4
  * @description 根据Tag归档
  * @TODO
