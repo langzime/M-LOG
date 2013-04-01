@@ -8,7 +8,7 @@
 				<li <#if active="草稿箱">class="active"</#if>><a href="${base}/user/post/drafts">草稿箱<i class="icon-chevron-right"></i></a></li>
 				<li <#if active="回收站">class="active"</#if>><a href="${base}/user/post/trash">回收站<i class="icon-chevron-right"></i></a></li>
 				<li <#if active="分类管理">class="active"</#if>><a href="${base}/user/catalog/list">分类管理<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/comments">博客评论<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="评论管理">class="active"</#if>><a href="${base}/user/comment/list">博客评论<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/messages">站内消息<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/reminds">我的通知<i class="icon-chevron-right"></i></a></li>
 				<li><a href="/admin/favorites">收藏管理<i class="icon-chevron-right"></i></a></li>
