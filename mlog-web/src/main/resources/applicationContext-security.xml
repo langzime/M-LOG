@@ -37,8 +37,6 @@
 	<beans:bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<beans:property name="loginFormUrl" value="/admin/login"></beans:property>
 	</beans:bean>
-	
-	<!-- <beans:bean id="userDetailService" class="org.mspring.mlog.web.security.UserDetailServiceImpl" /> -->
 
 	<!-- 登录验证器  start-->
 	<beans:bean id="loginFilter" class="org.mspring.mlog.web.security.UsernamePasswordAuthenticationFilter">

@@ -46,15 +46,15 @@ public class LoginAuthenticationSuccesssHandler extends SimpleUrlAuthenticationS
         // TODO Auto-generated method stub
         SavedRequest savedRequest = requestCache.getRequest(request, response);
 
+        //获取默认的登录成功跳转页
+        String defaultTargetUrl = org.mspring.platform.utils.StringUtils.isNotBlank(request.getParameter("targetUrl")) ? request.getParameter("targetUrl") : getTargetUrlParameter();
         if (savedRequest == null) {
-            super.onAuthenticationSuccess(request, response, authentication);
+            getRedirectStrategy().sendRedirect(request, response, defaultTargetUrl);
             return;
         }
-        String targetUrlParameter = getTargetUrlParameter();
-        if (isAlwaysUseDefaultTargetUrl() || (targetUrlParameter != null && StringUtils.hasText(request.getParameter(targetUrlParameter)))) {
+        if (isAlwaysUseDefaultTargetUrl() || (defaultTargetUrl != null && StringUtils.hasText(request.getParameter(defaultTargetUrl)))) {
             requestCache.removeRequest(request, response);
-            super.onAuthenticationSuccess(request, response, authentication);
-
+            getRedirectStrategy().sendRedirect(request, response, defaultTargetUrl);
             return;
         }
 

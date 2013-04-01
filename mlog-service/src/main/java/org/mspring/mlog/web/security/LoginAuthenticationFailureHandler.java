@@ -53,7 +53,8 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         // TODO Auto-generated method stub
-        if (defaultFailureUrl == null) {
+        String failureUrl = org.mspring.platform.utils.StringUtils.isNotBlank(request.getParameter("failureUrl")) ? request.getParameter("failureUrl") : defaultFailureUrl;
+        if (failureUrl == null) {
             log.debug("No failure URL set, sending 401 Unauthorized error");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed: " + exception.getMessage());
         }
@@ -61,12 +62,12 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
             saveException(request, exception);
 
             if (forwardToDestination) {
-                log.debug("Forwarding to " + defaultFailureUrl);
-                request.getRequestDispatcher(defaultFailureUrl).forward(request, response);
+                log.debug("Forwarding to " + failureUrl);
+                request.getRequestDispatcher(failureUrl).forward(request, response);
             }
             else {
-                log.debug("Redirecting to " + defaultFailureUrl);
-                redirectStrategy.sendRedirect(request, response, defaultFailureUrl);
+                log.debug("Redirecting to " + failureUrl);
+                redirectStrategy.sendRedirect(request, response, failureUrl);
             }
         }
     }
