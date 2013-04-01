@@ -103,4 +103,10 @@ public class MessageServiceImpl extends AbstractServiceSupport implements Messag
         return find("select um.PK.message from UserMessage um where um.PK.user.id = ?", user);
     }
 
+    @Override
+    public int findUnreadMessageCount(Long user) {
+        // TODO Auto-generated method stub
+        return count("select count(*) from UserMessage um where um.PK.user.id = ? and um.status = ?", new Object[] { user, MessageStatus.UNREAD });
+    }
+
 }

@@ -78,4 +78,13 @@ public interface MessageService {
      * @return
      */
     List<Message> findMessageByUser(Long user);
+
+    /**
+     * 获取用户未读消息数量
+     * 
+     * @param user
+     *            用户
+     * @return
+     */
+    int findUnreadMessageCount(Long user);
 }

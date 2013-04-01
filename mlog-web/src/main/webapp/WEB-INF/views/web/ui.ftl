@@ -3,7 +3,7 @@
 	<html>
 	<head>
 	<meta charset="utf-8">
-	<title>${title} - ${sitename}</title>
+	<title>${sitename}</title>
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="${base}/style/user.css" rel="stylesheet">
@@ -43,14 +43,18 @@
 		              		<li class="">
 		            	</ul>
 		            	<ul class="nav pull-right">
-		            		<li class="dropdown">
-			        			<a id="my_toolbar" class="dropdown-toggle" data-toggle="dropdown">${currentUser.alias} <b class="caret"></b></a>
-			        			<ul class="dropdown-menu" role="menu" aria-labelledby="my_toolbar">
-			        				<li role="presentation"><a role="menuitem" tabindex="-1" href="${base}/user/profile">个人中心</a></li>
-			        				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">消息</a></li>
-			                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">退出</a></li>
-		                        </ul>
-			        		</li>
+		            		<#if currentUser?exists>
+			            		<li class="dropdown">
+				        			<a id="my_toolbar" class="dropdown-toggle" data-toggle="dropdown">${currentUser.alias} <b class="caret"></b></a>
+				        			<ul class="dropdown-menu" role="menu" aria-labelledby="my_toolbar">
+				        				<li role="presentation"><a role="menuitem" tabindex="-1" href="${base}/user/profile">个人中心</a></li>
+				        				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">消息</a></li>
+				                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">退出</a></li>
+			                        </ul>
+				        		</li>
+		            		<#else>
+		            			<li><a href="#">登录</a></li>
+		            		</#if>
 		            	</ul>
 	          		</div>
 				</div>

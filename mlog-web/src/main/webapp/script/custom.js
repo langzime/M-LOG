@@ -238,6 +238,13 @@ $.extend(mlog, {
 			});
 		}
     },
+    
+    /**
+     * 获取消息
+     */
+    get_message : function(callback){
+    	$.getJSON(mlog.variable.base + "/get_message", callback);
+    },
 	
 	/**
 	 * @description 文章/自定义页面加载
