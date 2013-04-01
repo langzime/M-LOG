@@ -3,7 +3,8 @@
 	<html>
 	<head>
 	<meta charset="utf-8">
-	<title>${sitename}</title>
+	<title><#if title?has_content>${title} - </#if>${sitename}</title>
+	<link rel="shortcut icon" href="${base}/images/favicon.ico"/>
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="${base}/style/user.css" rel="stylesheet">
@@ -53,7 +54,7 @@
 			                        </ul>
 				        		</li>
 		            		<#else>
-		            			<li><a href="#">登录</a></li>
+		            			<li><a href="${base}/login">登录</a></li>
 		            		</#if>
 		            	</ul>
 	          		</div>

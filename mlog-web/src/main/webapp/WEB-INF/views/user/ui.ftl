@@ -30,6 +30,7 @@
 	<head>
 	<meta charset="utf-8">
 	<title>${title} - ${sitename}</title>
+	<link rel="shortcut icon" href="${base}/images/favicon.ico"/>
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="${base}/style/user.css" rel="stylesheet">
