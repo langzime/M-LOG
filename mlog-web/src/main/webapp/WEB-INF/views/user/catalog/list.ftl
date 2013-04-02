@@ -45,11 +45,11 @@
 								<tr>
 									<td class="${tdClass}"><input type="checkbox" name="deleteIds" value="${item.id}" /></td>
 									<td class="${tdClass}">${item.name}</td>
-									<td class="${tdClass}">${item.description!""}</td>
+									<td class="${tdClass}">${item.description?default("")}</td>
 									<td class="${tdClass}">${item.createTime}</td>
 									<td class="${tdClass}">
 										<input type="hidden" class="ids" name="ids" value="${item.id}" />
-										<input type="hidden" class="order" name="order" value="${item.order!""}" />
+										<input type="hidden" class="order" name="order" value="${item.order?default("")}" />
 										<a href="#" onclick=edit(this); >修改</a>
 									</td>
 								</tr>
