@@ -68,13 +68,13 @@
 							</tr>
 						</#list>
 					</#if>
-					<tr>
-						<td ><input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" /></td>
-						<td  colspan="7">
-							<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
-						</td>
-					</tr>
 				</table>
+				<div style="float:left;">
+					<input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" />
+				</div>
+				<div style="float:right;">
+					<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
+				</div>
 	    	</form>
 	    </div>
 	</div>
