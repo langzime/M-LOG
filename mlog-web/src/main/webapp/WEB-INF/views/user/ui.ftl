@@ -31,8 +31,14 @@
 	<meta charset="utf-8">
 	<title>${title} - ${sitename}</title>
 	<link rel="shortcut icon" href="${base}/images/favicon.ico"/>
+	<#--
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	-->
+	<link href="${base}/script/bootstrap/skins/cosmo/bootstrap.min.css" rel="stylesheet">
+	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="${base}/script/bootstrap/skins/cosmo/bootswatch.css" rel="stylesheet">
+	
 	<link href="${base}/style/user.css" rel="stylesheet">
 	<script type="text/javascript" src="${base}/script/jquery.js"></script>
 	<script type="text/javascript" src="${base}/script/script_variable.js"></script>
@@ -60,7 +66,7 @@
 	    <style type="text/css">
 		body { padding-top: 60px;}
 		</style>
-	    <div class="navbar navbar-fixed-top <#-- navbar-inverse -->">
+	    <div class="navbar navbar-fixed-top navbar-inverse">
 	  		<div class="navbar-inner">
 	    		<div class="container-fluid">
 	          		<a class="brand" href="${siteurl}" target="_blank">${sitename}</a>

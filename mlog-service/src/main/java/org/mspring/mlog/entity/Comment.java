@@ -251,9 +251,12 @@ public class Comment implements Serializable {
 
     @Transient
     public Post getPostEager() {
-        Post post = ServiceFactory.getPostService().getPostById(this.getPost().getId());
-        this.setPost(post);
-        return post;
+        if (this.post != null && this.post.getId() != null) {
+            Post post = ServiceFactory.getPostService().getPostById(this.getPost().getId());
+            this.setPost(post);
+            return post;
+        }
+        return null;
     }
 
     public static final class Status {
