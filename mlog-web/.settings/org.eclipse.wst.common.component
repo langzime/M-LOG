@@ -3,6 +3,8 @@
     <wb-module deploy-name="mlog-web">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <dependent-module archiveName="mlog-service-1.4.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/mlog-service/mlog-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
