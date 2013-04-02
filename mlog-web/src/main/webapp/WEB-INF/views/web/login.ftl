@@ -26,7 +26,7 @@
 	    		</section>
 	        	<section class="row-fluid">
 	        		<section class="span8 lh30">
-	        			<label><input type="checkbox" name="rememberMe" />下次自动登录</label>
+	        			<label><input type="checkbox" name="rememberMe" />&nbsp;下次自动登录</label>
 	        		</section>
 	      			<section class="span1"><input type="submit" value=" 登录 " class="btn btn-primary"></section>
 	  			</section>
@@ -37,8 +37,8 @@
 			<section class="span5 right">
 				<h2><a href="#">没有帐户？</a></h2>
 				<section>
-					<p>欢迎登录！</p>
-					<p><input type="button" value=" 注册 " class="btn"></p>
+					<p>欢迎注册！</p>
+					<p><a class="btn" href="${base}/reg">注册</a></p>
 				</section>
 			</section>
 		</section>

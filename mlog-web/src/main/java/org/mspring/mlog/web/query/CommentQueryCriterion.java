@@ -31,11 +31,7 @@ public class CommentQueryCriterion extends AbstractQueryCriterion {
         builder.buildLike("comment.author", "author");
         builder.buildLike("comment.content", "content");
         builder.buildLike("comment.post.title", "post.title");
-        
-        Object status = queryParams.get("status");
-        if(status!=null){
-        	builder.buildEqual("comment.status", "status");
-        }
+        builder.buildEqual("comment.status", "status");
         
         Object userId = queryParams.get("user.id");
         if(userId!=null){

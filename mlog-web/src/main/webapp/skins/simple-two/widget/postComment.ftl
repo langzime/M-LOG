@@ -15,16 +15,16 @@
 						<a class="comment-reply-link" href="javascript:quote(${comment.id});">回复</a>
 					</div>
 					<div class="comment-content">
-						<#if comment.parent?exists && comment.parent.id != 0>
+						<#if comment.parent?exists && comment.parent.id != 0>						
 							<#assign parent = comment.parentEager />
 							<div class="quotewap">
-								<div class="quotetop">@${parent.author!"蒙面大侠"}</div>
+								<div class="quotetop">@${parent.author?default()}</div>
 								<div class="quotemain">
-									${parent.content!""}
+									${parent.content?default()}
 								</div>
 							</div>
 						</#if>
-						${comment.content!""}
+						${comment.content?default()}
 					</div>
 				</div>
 			</li>	
