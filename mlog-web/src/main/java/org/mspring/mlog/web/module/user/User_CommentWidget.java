@@ -42,7 +42,7 @@ public class User_CommentWidget extends AbstractUserWidget{
             commentPage = new Page<Comment>();
         }
         commentPage.setSort(new Sort("id", Sort.DESC));
-        
+        commentPage.pageSize(13);
         User loginUser = SecurityUtils.getCurrentUser();
         
         if(loginUser!=null){

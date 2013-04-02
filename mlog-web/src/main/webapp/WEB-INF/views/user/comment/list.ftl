@@ -29,6 +29,7 @@
 						<th>编号</th>
 						<th>文章标题</th>
 						<th>评论内容</th>
+						<th>评论时间</th>
 						<th>作者</th>
 						<th>状态</th>
 						<th>
@@ -41,22 +42,22 @@
 							<#if item_index%2 == 0>
 								<#assign tdClass = "even">
 							</#if>
-							<#-- <#assign post=item.postEager /> -->
+							<#assign post=item.postEager />
 							<tr>
 								<td class="${tdClass}"><input type="checkbox" name="id" value="${item.id}" /></td>
-								<td class="${tdClass}">${item.id}</td>
-								<td class="${tdClass}"><a href="" title="${item.post.title}" target="_blank">${item.post.title}</a></td>
+								<td class="${tdClass}">${item_index+1}</td>
+								<td class="${tdClass}"><a href="<@postUrl post="post"/>"title="${post.title}" target="_blank">${post.title}</a></td>
 								<td class="${tdClass}"><@substring str=item.content endIndex=50 /></td>
 								<td class="${tdClass}">${item.createTime}</td>
-								<td class="${tdClass}">${item.author}</td>
+								<td class="${tdClass}">${item.author.alias?default("")}</td>
 								<!--状态 -->
 								<td class="${tdClass}">
 									<#if item.status = "approved">
-										审核通过
+										<font color="green">审核通过</font>
 									<#elseif item.status = "wait_for_approve">
-										等待审核
+										<font color="red">等待审核</font>
 									<#elseif item.status = "spam">
-										垃圾评论
+										<font color="gray" style="TEXT-DECORATION: line-through">垃圾评论</font>
 									<#elseif item.status = "recycle">
 										回收站
 									</#if>
@@ -67,6 +68,12 @@
 							</tr>
 						</#list>
 					</#if>
+							<tr>
+								<td ><input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" /></td>
+								<td  colspan="7">
+								<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
+								</td>
+							</tr>
 				</table>
 	    	</form>
 	    </div>

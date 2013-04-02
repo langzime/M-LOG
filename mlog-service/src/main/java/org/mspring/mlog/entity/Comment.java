@@ -167,7 +167,7 @@ public class Comment implements Serializable {
      * @return the post
      */
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = CacheService.CacheName.LAZY_CACHE_NAME)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Post.class)
+    @ManyToOne( fetch = FetchType.LAZY,  optional = false, targetEntity = Post.class)
     @JoinColumn(name = "post")
     public Post getPost() {
         return post;
@@ -210,7 +210,7 @@ public class Comment implements Serializable {
     /**
      * @return the author
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, targetEntity = User.class)
+    @ManyToOne( fetch = FetchType.LAZY, optional = true, targetEntity = User.class)
     @JoinColumn(name = "author", nullable = false)
     public User getAuthor() {
         return author;
