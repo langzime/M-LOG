@@ -6,11 +6,11 @@ mlog-web/src/main/webapp/uploads
 mlog-web/src/main/webapp/sitemap_google_mobile.xml
 mlog-web/src/main/webapp/sitemap_google.xml
 mlog-web/src/main/webapp/sitemap.xml
-/.classpath
-/.project
-/mspring-platform/.classpath
-/mspring-platform/.project
-/mlog-web/.classpath
-/mlog-web/.project
 /mlog-service/.classpath
+/mlog-web/.classpath
+/.classpath
+/mspring-platform/.classpath
+/mlog-web/.project
+/mspring-platform/.project
+/.project
 /mlog-service/.project
