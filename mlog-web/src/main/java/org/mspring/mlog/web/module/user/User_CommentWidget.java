@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.mspring.mlog.entity.Comment;
 import org.mspring.mlog.entity.security.User;
 import org.mspring.mlog.service.CommentService;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("user/comment")
 public class User_CommentWidget extends AbstractUserWidget {
 
+	public static final Logger log = Logger.getLogger(User_CommentWidget.class);
+	
     private CommentService commentService;
 
     @Autowired
@@ -111,12 +115,10 @@ public class User_CommentWidget extends AbstractUserWidget {
      * @return
      */
     @Log
-    @RequestMapping("/view")
+    @RequestMapping(value="/view", method=RequestMethod.GET)
     public String showCommentView(@RequestParam(required = false) Long id, @ModelAttribute Page<Comment> commentPage, @ModelAttribute Comment comment, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
-        if (comment == null) {
-            comment = commentService.getCommentById(id);
-        }
-        model.addAttribute("comment", comment);
+        Comment commentView = commentService.getCommentById(id);
+        model.addAttribute("comment", commentView);
         return view("comment/view");
     }
 
@@ -131,10 +133,21 @@ public class User_CommentWidget extends AbstractUserWidget {
      * @param model
      * @return 评论列表
      */
-    @Log
     @RequestMapping("/audit")
-    public String auditComment(@ModelAttribute Page<Comment> commentPage, @ModelAttribute Comment comment, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
-
+    @Log
+    public String auditComment(@RequestParam(required = false) Long[] id, @ModelAttribute Page<Comment> commentPage, @ModelAttribute Comment comment, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
+        String status = request.getParameter("type");
+        if (id != null && id.length > 0 && StringUtils.isNotBlank(status)) {
+            if (Comment.Status.APPROVED.equals(status)) {
+                commentService.approved(id);
+            } else if (Comment.Status.SPAM.equals(status)) {
+                commentService.spam(id);
+            } else if (Comment.Status.RECYCLE.equals(status)) {
+                commentService.recycle(id);
+            } else {
+                log.warn("update comment status failure, status [" + status + "] is illegal");
+            }
+        }
         return listComment(commentPage, comment, queryParams, request, response, model);
     }
 }

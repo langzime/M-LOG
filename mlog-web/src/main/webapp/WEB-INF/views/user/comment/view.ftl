@@ -1,34 +1,88 @@
-<#import "/META-INF/spring.ftl" as spring/>
-<#import "/META-INF/spring.ftl" as spring />
-<#import "/META-INF/mspring.ftl" as mspring />
-<#import "../ui.ftl" as ui>
-<@ui.header title="评论管理"/>
-	<@ui.sidebar active="评论管理"/>
-	<div class="span10">
-		<ul class="breadcrumb" style="margin-bottom: 5px;">
-			<li><a href="${siteurl}">首页</a> <span class="divider">/</span></li>
-			<li><a href="${base}/user/profile">管理</a> <span class="divider">/</span></li>                  
-			<li><a href="${base}/user/comment/list">评论管理</a> <span class="divider">/</span></li>
-			<li class="active">评论审核</li>
-	    </ul>
-	     <div class="widget-box">
-			<div class="widget-title">评论审核</div>
-				<div class="widget-content" >
-	    		<form id="auditForm" name="auditForm" action="${base}/user/comment/audit" method="POST">
-	    		<@spring.bind "comment"/>
-		    		<div class="control-group" style="width:500px;float:left">
-						<label class="control-label">评论作者</label>
-						<input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-		    		</div>
-		    		<div class="control-group" style="width:500px;float:right" >
-						<label class="control-label">评论&nbsp;IP</label>
-						<input id="textinput" name="textinput" type="text" placeholder="placeholder" class="input-xlarge">
-		    		</div>
-	    		</form>
-	    		</div>
-	    	</div>
-	    </div>
-	 </div>
-<script type="text/javascript">
-</script>
-<#include "../footer.ftl" />
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>评论信息</title>
+	<link rel="stylesheet" type="text/css" href="${base}/style/global.css">
+	<script type="text/javascript" src="${base}/script/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//斑马线
+			var tables=document.getElementsByTagName("table");
+			var b=false;
+			for (var j = 0; j < tables.length; j++){
+				var cells = tables[j].getElementsByTagName("tr");
+				//cells[0].className="color3";
+				b=false;
+				for (var i = 0; i < cells.length; i++){
+					if(b){
+						cells[i].className="color2";
+						b=false;
+					}
+					else{
+						cells[i].className="color3";
+						b=true;
+					};
+				};
+			}
+		});
+	</script>
+</head>
+<body>
+	<#assign post=comment.postEager />
+	<table style="width:100%;">
+		<tr>
+			<td class="fieldlabel" style="width:60px;">编号：</td>
+			<td>${comment.id?default("")}</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">评论作者：</td>
+			<td>${comment.author.alias?default("")}</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">评论时间：</td>
+			<td>${comment.createTime?default("")}</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">IP：</td>
+			<td>${comment.postIp?default("")}</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">Agent：</td>
+			<td>${comment.agent?default("")}</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">状态：</td>
+			<td>
+				<#if comment.status = "approved">
+					<font color="green">审核通过</font>
+				<#elseif comment.status = "wait_for_approve">
+					<font color="red">等待审核</font>
+				<#elseif comment.status = "spam">
+					<font color="gray" style="TEXT-DECORATION: line-through">垃圾评论</font>
+				<#elseif comment.status = "recycle">
+					回收站
+					</#if>
+			</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">评论文章：</td>
+			<td>${comment.post.title?default("")}</td>
+		</tr>
+		<tr>
+			<td class="fieldlabel" style="width:60px;">评论内容：</td>
+			<td>${comment.content?default("")}</td>
+		</tr>
+		<#--
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				<button class="btn">审核通过</button>
+				<button class="btn">标记为垃圾评论</button>
+				<button class="btn">移入回收站</button>
+				<button class="btn">测底删除</button>
+			</td>
+		</tr>
+		-->
+	</table>
+</body>
+</html>
