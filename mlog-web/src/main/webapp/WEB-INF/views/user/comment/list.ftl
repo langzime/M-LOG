@@ -19,12 +19,12 @@
 						<td >
 							<@spring.formSingleSelect path="comment.status" 
 							
-							options=commentStatus attributes='onchange="changeStatus();" style="width:120px;margin-bottom: 0px;height:26px"' />
+							options=commentStatus attributes='onchange="changeStatus();" style="width:120px;margin-bottom: 0px;height:26px;font-size:12px;color:#555"' />
 						</td>
 						
 						<td class="fieldlabel" style="width:70px;">评论内容</td>
 						<td>
-							<@spring.formInput path="comment.content" attributes='class="textinput" style="width:120px ;margin-bottom: 0px;height:15px"' />
+							<@spring.formInput path="comment.content" attributes='class="textinput" style="width:120px ;margin-bottom: 0px;height:15px;"' />
 						</td>
 						<td class="fieldlabel" style="width:70px;">文章标题</td>
 						<td><@spring.formInput path="comment.post.title" attributes='class="textinput" style="width:120px ;margin-bottom: 0px;height:15px"' /></td>
