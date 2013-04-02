@@ -68,14 +68,19 @@
 							</tr>
 						</#list>
 					</#if>
-							<tr>
-								<td ><input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" /></td>
-								<td  colspan="7">
-								<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
-								</td>
-							</tr>
+					<tr>
+						<td ><input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" /></td>
+						<td  colspan="7">
+							<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
+						</td>
+					</tr>
 				</table>
 	    	</form>
 	    </div>
 	</div>
-	
+<script type="text/javascript">
+	function delete(){
+		mlog.form.submitForm('commentForm', '${base}/user/comment/delete');
+	}
+</script>
+<#include "../footer.ftl" />

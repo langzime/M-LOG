@@ -90,12 +90,9 @@ public class User_CatalogWidget extends AbstractUserWidget {
      */
     @RequestMapping("ctrl")
     @Log
-    public String ctrl(@ModelAttribute Page<Catalog> catalogPage, @ModelAttribute Catalog catalog, @QueryParam Map queryParams, @RequestParam(required = false) Long[] ids, @RequestParam(required = false) Long[] deleteIds, @RequestParam(required = false) Long[] orders, HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String ctrl(@ModelAttribute Page<Catalog> catalogPage, @ModelAttribute Catalog catalog, @QueryParam Map queryParams, @RequestParam(required = false) Long[] ids, @RequestParam(required = false) Long[] deleteIds, HttpServletRequest request, HttpServletResponse response, Model model) {
         if (deleteIds != null && deleteIds.length > 0) {
             catalogService.deleteCatalog(deleteIds);
-        }
-        if (orders != null && orders.length > 0) {
-            catalogService.setCatalogOrders(ids, orders);
         }
         return listCatalog(catalogPage, catalog, queryParams, request, response, model);
     }

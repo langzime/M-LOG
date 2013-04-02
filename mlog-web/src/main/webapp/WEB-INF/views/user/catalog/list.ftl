@@ -168,31 +168,8 @@
 	}
 
 	function ctrl(){
-		var flagOrders = validateOrders();
-		if(!flagOrders){
-			return;
-		}
 		mlog.form.submitForm('catalogForm', '${base}/user/catalog/ctrl');
 	}
 	
-	function validateOrders(){
-		var orders = document.getElementsByName('orders');
-		for(var i = 0; i < orders.length; i++){
-			var value = $(orders[i]).val();
-			if($.trim(value).length > 0 && !(/^\d+$/.test(value))){
-				mlog.dialog.tip({msg:'排序号必须为数字', type:'warn'});
-				$(orders[i]).focus();
-				return false;
-			}
-			if($.trim(value).length > 0){
-				if(value < 1 || value > 1000){
-					mlog.dialog.tip({msg:'排序号的范围必须在1-1000之间', type:'warn'});
-					$(orders[i]).focus();
-					return false;
-				}
-			}
-		}
-		return true;
-	}
 </script>
 <#include "../footer.ftl" />
