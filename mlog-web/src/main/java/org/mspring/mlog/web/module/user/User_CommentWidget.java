@@ -16,6 +16,7 @@ import org.mspring.mlog.web.security.SecurityUtils;
 import org.mspring.platform.persistence.query.QueryCriterion;
 import org.mspring.platform.persistence.support.Page;
 import org.mspring.platform.persistence.support.Sort;
+import org.mspring.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,8 +55,14 @@ public class User_CommentWidget extends AbstractUserWidget {
         if (commentPage == null) {
             commentPage = new Page<Comment>();
         }
+        
+        if (queryParams.get("status") == null || StringUtils.isBlank(queryParams.get("status").toString())) {
+            comment.setStatus(Comment.Status.APPROVED);
+            queryParams.put("status", Comment.Status.APPROVED);
+        }
+        
         commentPage.setSort(new Sort("id", Sort.DESC));
-        commentPage.pageSize(13);
+        commentPage.pageSize(10);
         User loginUser = SecurityUtils.getCurrentUser();
 
         if (loginUser != null) {
@@ -65,6 +72,7 @@ public class User_CommentWidget extends AbstractUserWidget {
         QueryCriterion queryCriterion = new CommentQueryCriterion(queryParams);
         commentPage = commentService.findComment(commentPage, queryCriterion);
         model.addAttribute("commentPage", commentPage);
+        model.addAttribute("commentStatus", Comment.Status.getCommentStatusMap());
         return view("comment/list");
     }
 
@@ -103,7 +111,7 @@ public class User_CommentWidget extends AbstractUserWidget {
      * @return
      */
     @Log
-    @RequestMapping("/auditView")
+    @RequestMapping("/view")
     public String showCommentView(@RequestParam(required = false) Long id, @ModelAttribute Page<Comment> commentPage, @ModelAttribute Comment comment, @QueryParam Map queryParams, HttpServletRequest request, HttpServletResponse response, Model model) {
         if (comment == null) {
             comment = commentService.getCommentById(id);

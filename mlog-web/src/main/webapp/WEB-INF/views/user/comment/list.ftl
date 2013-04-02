@@ -12,6 +12,34 @@
 	    </ul>
 	    <div class="row-fluid">
 	    	<form id="commentForm" name="commentForm" action="${base}/user/comment/list" method="POST">
+	    		<@spring.bind "comment" />
+	    		<div class="widget-box">
+	    		<div class="widget-title">评论查询</div>
+				<div class="widget-content" >
+				<table class="table" style="margin-bottom:0px">
+					<tr>
+						<td class="fieldlabel" style="width:50px;">状态</td>
+						<td >
+							<@spring.formSingleSelect path="comment.status" 
+							
+							options=commentStatus attributes='onchange="changeStatus();" style="width:120px"' />
+						</td>
+						
+						<td class="fieldlabel" style="width:40px;">内容</td>
+						<td>
+							<@spring.formInput path="comment.content" attributes='class="textinput" style="width:120px"' />
+						</td>
+						<td class="fieldlabel" style="width:40px;">作者</td>
+						<td><@spring.formInput path="comment.author" attributes='class="textinput" style="width:120px"' /></td>
+						
+						<td class="fieldlabel" style="width:40px;">文章</td>
+						<td><@spring.formInput path="comment.post.title" attributes='class="textinput" style="width:120px"' /></td>
+						
+						<td><input type="submit" class="btn" value=" 查 询 " /></td>
+					</tr>
+				</table>
+				</div>
+				</div>
 	    		<@spring.bind "commentPage"/>
 	    		<!-- pagination parameter -->
 				<@spring.formHiddenInput path="commentPage.pageNo" />
@@ -63,14 +91,14 @@
 									</#if>
 								</td>
 								<td class="${tdClass}">
-									<a href="${base}/user/comment/auditView?id=${item.id}">审批</a>
+									<a href="javascript:viewComment('${item.id}')">查看详情</a>
 								</td>
 							</tr>
 						</#list>
 					</#if>
 				</table>
 				<div style="float:left;">
-					<input  type="button" class="btn btn-danger" value="废 弃" data-loading-text="正在提交..." onclick="ctrl();" />
+					<input  type="button" class="btn btn-danger" value="彻底删除" data-loading-text="正在提交..." onclick="ctrl();" />
 				</div>
 				<div style="float:right;">
 					<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
@@ -81,6 +109,18 @@
 <script type="text/javascript">
 	function delete(){
 		mlog.form.submitForm('commentForm', '${base}/user/comment/delete');
+	}
+	
+	function changeStatus(){
+		alert(123);
+	}
+	
+	function viewComment(id){
+			mlog.dialog.showModelDialog({
+			title : '评论详情',
+			content : 'url:${base}/user/comment/view?id=' + id,
+			width : '500px'
+		});
 	}
 </script>
 <#include "../footer.ftl" />
