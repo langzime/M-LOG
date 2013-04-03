@@ -156,4 +156,12 @@ $(document).ready(
 			});
 			
 			
+			$.validator.addMethod("ifcanuse", function(value, element, params){
+				if(value === undefined){
+					return;
+				}
+				var reg = /^\w+$/;
+			    return (reg.test(value))||this.optional(element);
+			});
+			
 		});

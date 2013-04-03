@@ -62,7 +62,7 @@ public class PathParamWebArgumentRequestResolver implements WebArgumentResolver 
             return value;
         }
 
-        value = StringUtils.encoding(value, "ISO-8859-1", "UTF-8");
+        // value = StringUtils.encoding(value, "ISO-8859-1", "UTF-8");
 
         Class<?> requiredType = parameter.getParameterType();
         if (conversionService.canConvert(String.class, requiredType)) {
