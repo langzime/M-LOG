@@ -13,33 +13,25 @@
 	    <div class="row-fluid">
 	    	<form id="commentForm" name="commentForm" action="${base}/user/comment/list" method="POST">
 	    		<@spring.bind "comment" />
-	    		<div class="widget-box">
-	    		<div class="widget-title">评论查询</div>
-				<div class="widget-content" >
-				<table class="table" style="margin-bottom:0px">
-					<tr>
-						<td class="fieldlabel" style="width:50px;">状态</td>
+				<table  style="margin-bottom:0px" >
+					<tr height="25px">
+						<td class="fieldlabel" style="width:70px;">评论状态</td>
 						<td >
 							<@spring.formSingleSelect path="comment.status" 
 							
-							options=commentStatus attributes='onchange="changeStatus();" style="width:120px"' />
+							options=commentStatus attributes='onchange="changeStatus();" style="width:120px;margin-bottom: 0px;height:26px;font-size:12px;color:#555"' />
 						</td>
 						
-						<td class="fieldlabel" style="width:40px;">内容</td>
+						<td class="fieldlabel" style="width:70px;">评论内容</td>
 						<td>
-							<@spring.formInput path="comment.content" attributes='class="textinput" style="width:120px"' />
+							<@spring.formInput path="comment.content" attributes='class="textinput" style="width:120px ;margin-bottom: 0px;height:15px;"' />
 						</td>
-						<td class="fieldlabel" style="width:40px;">作者</td>
-						<td><@spring.formInput path="comment.author" attributes='class="textinput" style="width:120px"' /></td>
+						<td class="fieldlabel" style="width:70px;">文章标题</td>
+						<td><@spring.formInput path="comment.post.title" attributes='class="textinput" style="width:120px ;margin-bottom: 0px;height:15px"' /></td>
 						
-						<td class="fieldlabel" style="width:40px;">文章</td>
-						<td><@spring.formInput path="comment.post.title" attributes='class="textinput" style="width:120px"' /></td>
-						
-						<td><input type="submit" class="btn" value=" 查 询 " /></td>
+						<td><input type="submit" class="btn btn-small btn-primary" value=" 查 询 " /></td>
 					</tr>
 				</table>
-				</div>
-				</div>
 	    		<@spring.bind "commentPage"/>
 	    		<!-- pagination parameter -->
 				<@spring.formHiddenInput path="commentPage.pageNo" />
@@ -54,7 +46,7 @@
 						<th>
 							<input type="checkbox" onclick="mlog.form.checkAll(this, 'id');" />
 						</th>
-						<th>编号</th>
+						<th>序号</th>
 						<th>文章标题</th>
 						<th>评论内容</th>
 						<th>评论时间</th>
@@ -98,7 +90,14 @@
 					</#if>
 				</table>
 				<div style="float:left;">
-					<input  type="button" class="btn btn-danger" value="彻底删除" data-loading-text="正在提交..." onclick="ctrl();" />
+					<input  type="button" class="btn btn-danger" style="background-color:green"  value="审核通过" 
+					data-loading-text="正在提交..." onclick="mlog.form.confirmSubmit('commentForm', '${base}/user/comment/audit?type=approved', '确认审核通过？');" />
+					<input  type="button" class="btn btn-danger" value="标记为垃圾评论" 
+					data-loading-text="正在提交..." onclick="mlog.form.confirmSubmit('commentForm', '${base}/user/comment/audit?type=spam', '确认标记为垃圾评论？');" />
+					<input  type="button" class="btn btn-danger" style="background-color:gray" value="移入回收站" 
+					data-loading-text="正在提交..."  onclick="mlog.form.confirmSubmit('commentForm', '${base}/user/comment/audit?type=recycle', '确认移入回收站？');" />
+					<input  type="button" class="btn btn-danger" style="background-color:black"  value="彻底删除" 
+					data-loading-text="正在提交..." onclick="mlog.form.confirmSubmit('commentForm', '${base}/user/comment/delete');" />
 				</div>
 				<div style="float:right;">
 					<@mspring.pagingnavigator page=commentPage form_id="commentForm" />
@@ -107,12 +106,12 @@
 	    </div>
 	</div>
 <script type="text/javascript">
-	function delete(){
+	function deleteComment(){
 		mlog.form.submitForm('commentForm', '${base}/user/comment/delete');
 	}
 	
 	function changeStatus(){
-		alert(123);
+		$('#commentForm').submit();
 	}
 	
 	function viewComment(id){
