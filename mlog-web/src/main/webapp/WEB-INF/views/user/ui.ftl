@@ -1,43 +1,14 @@
-<#macro sidebar active="个人中心">
-	<div class="span2">
-		<div class="back-left">
-			<ul class="nav nav-tabs nav-stacked">
-				<li <#if active="个人中心">class="active"</#if>><a href="${base}/user/profile">个人中心<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="发表文章">class="active"</#if>><a href="${base}/user/post/create">发表文章<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="文章管理">class="active"</#if>><a href="${base}/user/post/list">文章管理<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="草稿箱">class="active"</#if>><a href="${base}/user/post/drafts">草稿箱<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="回收站">class="active"</#if>><a href="${base}/user/post/trash">回收站<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="分类管理">class="active"</#if>><a href="${base}/user/catalog/list">分类管理<i class="icon-chevron-right"></i></a></li>
-				<li <#if active="评论管理">class="active"</#if>><a href="${base}/user/comment/list">博客评论<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/messages">站内消息<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/reminds">我的通知<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/favorites">收藏管理<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/concern">关注管理<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/visits">访客记录<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/privacy">隐私管理<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/profile">个人资料<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/portraint">头像管理<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/password">登陆密码<i class="icon-chevron-right"></i></a></li>
-				<li><a href="/admin/email">登陆邮箱<i class="icon-chevron-right"></i></a></li>
-			</ul>
-		</div>
-	</div>
-</#macro>
-
+<#import "../global.ui.ftl" as gui>
 <#macro header title=currentUser.alias>
 	<!DOCTYPE html>
 	<html>
 	<head>
 	<meta charset="utf-8">
 	<title>${title} - ${sitename}</title>
-	<#--
+	
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	-->
-	<link href="${base}/script/bootstrap/skins/cosmo/bootstrap.min.css" rel="stylesheet">
-	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="${base}/script/bootstrap/skins/cosmo/bootswatch.css" rel="stylesheet">
-	
+		
 	<link href="${base}/style/user.css" rel="stylesheet">
 	<script type="text/javascript" src="${base}/script/jquery.js"></script>
 	<script type="text/javascript" src="${base}/script/script_variable.js"></script>
@@ -76,16 +47,7 @@
 		                	</li>
 		              		<li class="">
 		            	</ul>
-		            	<ul class="nav pull-right">
-		            		<li class="dropdown">
-			        			<a id="my_toolbar" class="dropdown-toggle" data-toggle="dropdown">${currentUser.alias} <b class="caret"></b></a>
-			        			<ul class="dropdown-menu" role="menu" aria-labelledby="my_toolbar">
-			        				<li role="presentation"><a role="menuitem" tabindex="-1" href="${base}/user/profile">个人中心</a></li>
-			        				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">我的主页</a></li>
-			                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">个人资料</a></li>
-		                        </ul>
-			        		</li>
-		            	</ul>
+		            	<@gui.dropmenu />
 	          		</div>
 				</div>
 			</div>
@@ -93,4 +55,31 @@
 		
 		<div class="container-fluid">
 			<div class="row-fluid">
+</#macro>
+
+
+<#macro sidebar active="个人中心">
+	<div class="span2">
+		<div class="back-left">
+			<ul class="nav nav-tabs nav-stacked">
+				<li <#if active="个人中心">class="active"</#if>><a href="${base}/user/profile">个人中心<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="发表文章">class="active"</#if>><a href="${base}/user/post/create">发表文章<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="文章管理">class="active"</#if>><a href="${base}/user/post/list">文章管理<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="草稿箱">class="active"</#if>><a href="${base}/user/post/drafts">草稿箱<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="回收站">class="active"</#if>><a href="${base}/user/post/trash">回收站<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="分类管理">class="active"</#if>><a href="${base}/user/catalog/list">分类管理<i class="icon-chevron-right"></i></a></li>
+				<li <#if active="评论管理">class="active"</#if>><a href="${base}/user/comment/list">博客评论<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/messages">站内消息<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/reminds">我的通知<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/favorites">收藏管理<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/concern">关注管理<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/visits">访客记录<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/privacy">隐私管理<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/profile">个人资料<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/portraint">头像管理<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/password">登陆密码<i class="icon-chevron-right"></i></a></li>
+				<li><a href="/admin/email">登陆邮箱<i class="icon-chevron-right"></i></a></li>
+			</ul>
+		</div>
+	</div>
 </#macro>

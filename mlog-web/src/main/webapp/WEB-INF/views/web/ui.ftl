@@ -1,3 +1,4 @@
+<#import "../global.ui.ftl" as gui>
 <#macro header title="">
 	<!DOCTYPE html>
 	<html>
@@ -5,13 +6,10 @@
 	<meta charset="utf-8">
 	<title><#if title?has_content>${title} - </#if>${sitename}</title>
 	<link rel="shortcut icon" href="${base}/images/favicon.ico"/>
-	<#--
+	
 	<link href="${base}/script/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${base}/style/bootstrap-cosmo.css" rel="stylesheet">
-	-->
-	<link href="${base}/script/bootstrap/skins/cosmo/bootstrap.min.css" rel="stylesheet">
-	<link href="${base}/script/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="${base}/script/bootstrap/skins/cosmo/bootswatch.css" rel="stylesheet">
+	<link href="${base}/style/base.css" rel="stylesheet">
 	
 	<link href="${base}/style/user.css" rel="stylesheet">
 	<script type="text/javascript" src="${base}/script/jquery.js"></script>
@@ -49,20 +47,7 @@
 		                	</li>
 		              		<li class="">
 		            	</ul>
-		            	<ul class="nav pull-right">
-		            		<#if currentUser?exists>
-			            		<li class="dropdown">
-				        			<a id="my_toolbar" class="dropdown-toggle" data-toggle="dropdown">${currentUser.alias} <b class="caret"></b></a>
-				        			<ul class="dropdown-menu" role="menu" aria-labelledby="my_toolbar">
-				        				<li role="presentation"><a role="menuitem" tabindex="-1" href="${base}/user/profile">个人中心</a></li>
-				        				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">消息</a></li>
-				                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">退出</a></li>
-			                        </ul>
-				        		</li>
-		            		<#else>
-		            			<li><a href="${base}/login">登录</a></li>
-		            		</#if>
-		            	</ul>
+		            	<@gui.dropmenu />
 	          		</div>
 				</div>
 			</div>
