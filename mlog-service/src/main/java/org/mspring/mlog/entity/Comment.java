@@ -39,7 +39,7 @@ import com.google.gson.annotations.Expose;
  */
 @Entity
 @Table(name = "comment")
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = CacheService.CacheName.LAZY_CACHE_NAME)
+@Cache(usage = CacheConcurrencyStrategy.NONE, region = CacheService.CacheName.LAZY_CACHE_NAME)
 public class Comment implements Serializable {
     /**
      * 

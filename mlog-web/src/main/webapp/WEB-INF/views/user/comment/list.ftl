@@ -44,7 +44,7 @@
 				<table class="table table-bordered table-hover " cellspacing="0" cellpadding="0">
 					<tr>
 						<th>
-							<input type="checkbox" onclick="mlog.form.checkAll(this, 'id');" />
+							<input type="checkbox" onclick="mlog.form.checkAll(this, 'deleteIds');" />
 						</th>
 						<th>序号</th>
 						<th>文章标题</th>
@@ -64,7 +64,7 @@
 							</#if>
 							<#assign post=item.postEager />
 							<tr>
-								<td class="${tdClass}"><input type="checkbox" name="id" value="${item.id}" /></td>
+								<td class="${tdClass}"><input type="checkbox" name="deleteIds" value="${item.id}" /></td>
 								<td class="${tdClass}">${item_index+1}</td>
 								<td class="${tdClass}"><a href="<@postUrl post="post"/>"title="${post.title}" target="_blank">${post.title}</a></td>
 								<td class="${tdClass}"><@substring str=item.content endIndex=50 /></td>
